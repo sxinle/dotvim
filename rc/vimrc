@@ -184,10 +184,10 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'terryma/vim-expand-region'
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'vim-scripts/ScrollColors'
-Plugin 'Rykka/colorv.vim' "{{{
-let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
-let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
-"}}}
+"Plugin 'Rykka/colorv.vim' "{{{
+"let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
+"let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
+""}}}
 Plugin 'kien/rainbow_parentheses.vim' "{{{
 let g:rbpt_colorpairs = [
             \ ['brown',       'RoyalBlue3'],
