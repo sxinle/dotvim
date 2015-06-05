@@ -1,0 +1,27 @@
+{
+    "libs": [
+        "emac5",
+        "chai",
+        "browser",
+        "jquery",
+        "underscore"
+    ],
+    "plugins": {
+        "angular": {
+            "baseURL": "./",
+            "paths": {}
+        },
+        "doc_comment": {
+            "baseURL": "./",
+            "paths": {}
+        },
+        "node": {
+            "baseURL": "./",
+            "paths": {}
+        },
+        "requirejs": {
+            "baseURL": "./",
+            "paths": {}
+        }
+    }
+}

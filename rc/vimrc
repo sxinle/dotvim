@@ -1,0 +1,950 @@
+if $SHELL =~ 'bin/fish'
+    set shell=/bin/sh
+endif
+let g:dotvim_settings = {}
+let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
+
+" Vundle"{{{
+
+filetype off                   " *required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-repeat'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'godlygeek/tabular'
+Plugin 'osyo-manga/vim-over'
+Plugin 'bling/vim-airline' "{{{
+set guifont=Monaco\ for\ Powerline:h13
+"set guifont=Droid\ Sans\ Mono\ Awesome:h15
+let g:airline_powerline_fonts=1                         " 使用powerline的字体
+let g:airline#extensions#tabline#left_alt_sep='¦'       " ¦
+let g:airline#extensions#tabline#fnamemod = ':t'        " 只显示文件名
+let g:airline#extensions#tabline#enabled = 1            " 是否显示tabline
+let g:airline#extensions#tabline#tab_nr_type = 1        " tab number
+let g:airline#extensions#tabline#buffer_nr_show = 0     " tabline显示编号
+let g:airline#extensions#tagbar#enabled = 0             " 不显示tagbar
+let g:airline#extensions#whitespace#enabled = 0         " warning_section show whitespace
+call airline#parts#define_accent('file', 'orange')      " 可以改变section的字体颜色
+let g:airline_section_b = airline#section#create(['%b-0x%B ', '%{getcwd()}'])
+let g:airline_theme='custom'
+"let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
+"let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
+"}}}
+Plugin 'justinmk/vim-sneak' "{{{
+let g:sneak#streak = 1
+let g:sneak#s_next = 1
+"}}}
+Plugin 'scrooloose/nerdtree' "{{{
+let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
+"}}}
+Plugin 'tpope/vim-surround' "{{{
+" ASP debug
+let g:surround_{char2nr("-")} = "'<--------DEBUG Begin!-------->\non error resume next \r \nif err<>0 then \nresponse.write err.Description \nresponse.end \nend if\n'<---------DEBUG End!--------->"
+let g:surround_{char2nr("=")} = "response.write \"<script language='javascript'>\"\nresponse.write \"alert('\r');\"\nresponse.write \"</script>\"\nresponse.end"
+"}}}
+Plugin 'kien/ctrlp.vim' "{{{
+let g:ctrlp_extensions = ['funky', 'mixed']
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_cmd = 'CtrlPFunky'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_regexp = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:40,results:100'
+let g:ctrlp_working_path_mode = 'rw'
+if executable('ag')
+    let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+elseif executable('file')
+    let g:ctrlp_user_command = 'find %s -type f'
+endif
+"}}}
+Plugin 'majutsushi/tagbar' "{{{
+let g:tagbar_width = 28
+let g:tagbar_autofocus = 1
+"}}}
+Plugin 'mhinz/vim-startify' "{{{
+autocmd VimEnter *
+            \ if !argc() |
+            \   Startify |
+            \   NERDTree |
+            \   execute "normal \<c-w>w" |
+            \ endif
+let NERDTreeHijackNetrw = 0
+let g:startify_session_dir = g:dotvim_settings.local_path . 'session'
+let g:startify_files_number        = 8
+let g:startify_session_persistence = 1
+let g:startify_session_autoload    = 1
+let g:startify_enable_special      = 0
+let g:startify_change_to_dir       = 0
+
+let g:startify_list_order = [
+            \ ['   LRU:'],
+            \ 'files',
+            \ ['   Sessions:'],
+            \ 'sessions',
+            \ ['   Bookmarks:'],
+            \ 'bookmarks',
+            \ ]
+
+let g:startify_skiplist = [
+            \ 'COMMIT_EDITMSG',
+            \ $VIMRUNTIME .'/doc',
+            \ 'bundle/.*/doc',
+            \ '.vimgolf',
+            \ ]
+
+let g:startify_bookmarks = [
+            \ '~/.vimrc',
+            \ ]
+
+"let g:startify_custom_footer =
+"\ ['', "   too young, too simple, sometimes naive......", '']
+
+let g:startify_custom_header =
+            \ map(split(system('date +%F%t[%u]%t%T | cowthink -y'), '\n'), '"   ". v:val') + ['']
+
+hi StartifyBracket ctermfg=240
+hi StartifyNumber  ctermfg=215
+hi StartifyPath    ctermfg=245
+hi StartifySlash   ctermfg=240
+hi StartifySpecial ctermfg=240
+hi StartifyHeader  ctermfg=114
+hi StartifyFooter  ctermfg=240
+hi StartifyFile    ctermfg=111"}}}
+Plugin 'osyo-manga/vim-anzu' "{{{
+"nnoremap <silent> n nzz
+"nnoremap <silent> N Nzz
+"nnoremap <silent> * *zz
+"nnoremap <silent> # #zz
+"nnoremap <silent> g* g*zz
+"nnoremap <silent> g# g*zz
+nmap <silent> * <Plug>(anzu-star-with-echo)zz
+nmap <silent> # <Plug>(anzu-sharp-with-echo)zz
+nmap <silent> n <Plug>(anzu-n-with-echo)zz
+nmap <silent> N <Plug>(anzu-N-with-echo)zz
+"}}}
+Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe' "{{{
+let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
+let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_always_populate_location_list=1
+let g:ycm_key_invoke_completion = '<C-L>'
+let g:ycm_complete_in_comments = 1
+"}}}
+Plugin 'SirVer/ultisnips' "{{{
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+inoremap <c-x><c-k> <c-x><c-k>
+set runtimepath+=~/.vim/dotvim
+let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
+"}}}
+Plugin 'Spaceghost/vim-matchit'
+Plugin 'mattn/emmet-vim'
+Plugin 'Valloric/MatchTagAlways' "{{{
+let g:mta_filetypes = {
+            \ 'html' : 1,
+            \ 'xhtml' : 1,
+            \ 'xml' : 1,
+            \ 'jinja' : 1,
+            \ 'aspvbs' : 1,
+            \ 'jsp' : 1,
+            \}
+"}}}
+Plugin 'tpope/vim-fireplace'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'leshill/vim-json'
+Plugin 'marijnh/tern_for_vim' "{{{
+let tern_show_signature_in_pum = 1
+"}}}
+Plugin 'wookiehangover/jshint.vim' "{{{
+let JSHintUpdateWriteOnly=1
+"}}}
+Plugin 'klen/python-mode' "{{{
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+"}}}
+Plugin 'nathanaelkane/vim-indent-guides' "{{{
+let g:indent_guides_guide_size = 1
+"}}}
+Plugin 'mbbill/undotree'
+Plugin 'kshenoy/vim-signature'
+Plugin 'terryma/vim-expand-region'
+Plugin 'jlanzarotta/bufexplorer'
+"Plugin 'vim-scripts/ScrollColors'
+Plugin 'Rykka/colorv.vim' "{{{
+let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
+let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
+"}}}
+Plugin 'kien/rainbow_parentheses.vim' "{{{
+let g:rbpt_colorpairs = [
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['black',       'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+nnoremap <silent> <A-o> :call ToggleRainbow()<CR>
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"}}}
+Plugin 'zhaocai/GoldenView.Vim' "{{{
+let g:goldenview__enable_at_startup = 0
+let g:goldenview__enable_default_mapping=0
+"}}}
+"Plugin 'vim-scripts/YankRing.vim' "{{{
+"let g:yankring_replace_n_pkey=''
+"let g:yankring_replace_n_nkey=''
+"let g:yankring_history_dir=g:dotvim_settings.local_path . 'yankring'
+""}}}
+Plugin 'dkprice/vim-easygrep' "{{{
+let g:EasyGrepWindow=1
+"let g:EasyGrepCommand = 1   " use external grep has no result
+let g:EasyGrepReplaceWindowMode = 2
+"}}}
+
+filetype plugin indent on     " *required!
+"}}}
+
+" Coniguration"{{{
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 一般设定
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=","
+let g:mapleader=","
+
+set nocp                            " 关闭Vi兼容模式
+set magic                           " 正则搜索 turn magic on
+set hidden                          " Allow buffer switching without saving
+set confirm                         " 在处理未保存或只读文件的时候，弹出确认
+set ttyfast                         " 表明使用的是快速终端连接
+set t_Co=256                        " 终端色彩颜色数目
+set autoread                        " 自动加载外部变化
+set showmatch                       " 高亮显示匹配的括号
+set shiftround                      " Insert mode下<CTRL-D>,<CTRL-T>总是使用shiftwidth的整数倍,该选项主要为了Normal mode 设置
+set cedit=<C-x>                     " Ex模式下,打开命令编辑窗口快捷键
+set matchtime=2                     " 匹配括号高亮的时间（单位是十分之一秒）
+set scrolloff=1                     " 光标移动到buffer的顶部和底部时保持几行距离
+set scrolljump=0                    " Lines to scroll when cursor leaves screen
+set history=100                     " history文件中需要记录的行数
+set background=dark                 " 深背景色
+set nostartofline                   " Visual模式下，按G后，光标不跳到第一列
+set shortmess=aoOtTI                " message显示缩写,不显示欢迎界面
+set keywordprg=                     " :help <S-k>默认查找的帮助页
+set iskeyword+=_,$,@,%,#,-          " 带有如下符号的单词不要被换行分割
+set completeopt-=preview
+set dictionary+=~/.vim/dotvim/util/en.dic
+if (has('gui_running'))
+    colo blackboard
+else
+    colo molokai
+endif
+
+let &guicursor = &guicursor . ",a:blinkon0"             " 禁用光标闪烁
+set viewoptions=folds,options,cursor,unix,slash         " Better Unix / Windows compatibility
+set wildignore=*.swp,*.bak,*.pyc,*.class                " <CTRL_x-f>文件名补全忽略的文件后缀
+exe "set viminfo='50,<1000,s100,%,/50,n" . g:dotvim_settings.local_path . "viminfo"
+
+if has("win32")
+    set listchars=tab:>-,trail:-,eol:$,extends:❯,precedes:❮
+else
+    set listchars=tab:▸\ ,trail:•,eol:$,extends:❯,precedes:❮ "set listchars=tab:▸\ ,trail:▫,eol:$,extends:❯,precedes:❮
+endif
+
+"set t_ti=                          " 退出vim时保留视图
+"set t_te=                          " 退出vim时保留视图
+"set autochdir                      " 自动设置目录为正在编辑的文件所在的目录
+"set showcmd                        " 显示命令
+"set ruler                          " 在编辑过程中，在右下角显示光标位置的状态行
+"set foldclose=all                  " 默认离开折叠则关闭
+"set whichwrap+=<,>,h,l             " 允许backspace和光标键跨越行边界
+
+set hlsearch                        " 搜索高亮
+set incsearch                       " 在搜索时，输入的词句的逐字符高亮
+set smartcase                       " 搜索时如果有大写，则不忽略大小写
+set ignorecase                      " 在搜索的时候忽略大小写
+set cursorline                      " 高亮光标所在行
+set splitright                      " 右侧垂直分割
+set laststatus=2                    " 始终显示状态栏
+set visualbell                      " 屏幕闪烁
+set novisualbell                    " 不要闪烁
+set noerrorbells                    " 关闭所有警告提示
+set visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+set winaltkeys=no                   " 关闭GUI菜单的Alt映射
+set virtualedit=block
+set cpoptions +=$                   " 使用‘C'时，不会立即删除当前行内容
+set winminheight=0
+set completeopt+=menuone            " 即使只有一个匹配，也使用弹出菜单
+
+set nowrap                          " 换行toggle
+set number                          " 显示行号
+set smarttab                        " 在行和段开始处使用制表符
+set tabstop=4                       " 制表符为4
+set expandtab                       " 是否用空格代替制表符
+set textwidth=0                     " 设置不要自动换行
+set linespace=0                     " 行间插入的像素
+set shiftwidth=4                    " 统一缩进为4
+set softtabstop=4
+set wildmenu                        " 增强模式中的命令行自动完成操作
+set foldmethod=marker               " 折叠文本类型
+set wildmode=longest,list,full
+
+set mouse=a                         " 支持鼠标
+set report=0                        " 报告命令执行的次数,比如 :s/foo/bar/g
+set mousehide                       " 输入时，隐藏鼠标
+set backspace=2                     " 使回格键（backspace）正常处理indent, eol, start等
+set matchpairs+=<:>                 " Match, to be used with %
+set selection=exclusive             " 闭区间
+set selectmode=mouse,key
+"set infercase                      " 自动补全是否大小写敏感
+"set equalprg=fmt                   " '='使用的外部排版程序
+set linebreak                      " h linebreak
+let &showbreak='↪ '
+"set formatoptions=tcrqn            " 自动格式化(ftplugin 会自动修改该设置...)
+"set mousemodel=popup_setpos        " 右键时弹出菜单选项
+
+if has('unnamedplus')               " 使用系统剪切板(需要编译时加入+X11特性)
+    set clipboard=unnamedplus,unnamed
+else                                " 类似Map <C-c>,<C-v>
+    set clipboard+=unnamed
+    vnoremap y "+y
+    nnoremap p "+gP
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 文件设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on                               " 语法高亮
+set nobackup                            " 不要备份文件
+set noswapfile                          " 不要生成swap文件，当buffer被丢弃的时候隐藏它
+set bufhidden=hide                      " 隐藏缓冲区 (不卸载)
+set fileformats=unix,dos,mac            " 文件类型
+set fillchars=vert:\ ,stl:\ ,stlnc:\    " 在被分割的窗口间显示空白，便于阅读
+
+" 持久化撤销设置
+if has("persistent_undo")
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+    exe "set undodir=" . g:dotvim_settings.local_path . "undodir"
+    au BufWritePre g:dotvim_settings.local_path . "undodir/*" setlocal noundofile
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI窗口设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 窗口最大化
+if has('gui_running')
+    if has('win32')
+        au GUIEnter * simalt ~x
+    else
+        set lines=58 columns=180
+    endif
+endif
+
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,chinese,latin-1
+"处理consle输出乱码
+language messages zh_CN.utf-8
+
+" [1] 处理菜单及右键菜单乱码
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
+
+" [2] 不显示菜单选项(不能和[1] 一起用!!!)
+if has("gui_running")
+    set guioptions -=m
+    set guioptions -=T
+    set guioptions -=r
+    set guioptions -=L
+    "set noimd      " 关闭输入法...
+    map <silent> <F8> :if &guioptions =~# 'T' <Bar>
+                \set guioptions -=m <Bar>
+                \set guioptions -=T <Bar>
+                \set guioptions -=r <Bar>
+                \set guioptions -=L <Bar>
+                \else <Bar>
+                \set guioptions +=m <Bar>
+                \set guioptions +=T <Bar>
+                \set guioptions +=r <Bar>
+                \set guioptions +=L <Bar>
+                \endif<CR>
+endif
+
+"}}}
+
+" Mapping"{{{
+
+" F-n Keymap"{{{
+nnoremap <silent><F1> :call ToggleLoc()<CR>
+xmap <F2> <Plug>NrrwrgnDo
+"Edit file "/usr/lib/python2.7/json/tool.py" (python --version 确定默认python版本)
+"step1=>main函数前添加
+"reload(sys)
+"sys.setdefaultencoding('utf-8')
+"step2=>json.dump函数加上参数
+"ensure_ascii=False
+"[!!!python <<EOF import vim EOF]
+nnoremap <F3> :%!python -m json.tool<CR>
+nmap <F4> <Plug>ToggleGoldenViewAutoResize
+nnoremap <silent> <F5> :AirlineToggle<CR>
+nnoremap <silent> <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR> :exe 'AirlineTheme ' . airline_theme<CR> :redraw!<CR>
+nnoremap <F7> :call ToggleYcm()<CR>
+"nnoremap <F9> :!ctags -R *<CR>                                            " 普通文件tags
+"nnoremap <F10> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *<CR>    " C++文件tags
+"}}}
+
+"模式映射 "{{{
+nnoremap 0 ^
+nnoremap ^ 0
+nnoremap j gj
+nnoremap k gk
+nnoremap q <Nop>
+nnoremap Q q
+nnoremap Y y$
+vnoremap < <gv
+vnoremap > >gv
+xnoremap p pgvly
+inoremap jj <ESC>
+inoremap kk <ESC>$a();<ESC>
+inoremap <c-o> <c-o>o
+vnoremap ii <ESC>'<
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+nnoremap <silent> <C-c> <C-c>:echo<CR>
+vnoremap . :normal .<CR>
+nnoremap <silent> <A-f> :call PreviewFold()<CR>
+nnoremap <silent> <A-r> :call RandomThemes(1)<CR>
+nnoremap <silent> <A-m> :Tagbar<CR>:NERDTreeToggle<CR><C-w>l
+nnoremap <silent> <A-h> :bprev<CR>
+nnoremap <silent> <A-l> :bnex<CR>
+nnoremap <silent> <A-.> :lne<CR>
+nnoremap <silent> <A-,> :lp<CR>
+nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
+nnoremap <silent> <leader>+  :%!awk '{print; sum+=($1);}END{print "\nsum="sum}'<CR>
+nnoremap <silent> <leader>- <C-W>_<C-W>\|            "\- 分割窗口最大化
+nnoremap <silent> <leader>= <C-W>=                   "\= 分割窗口等大
+nnoremap <silent> <leader><Space> :noh<CR>:call anzu#clear_search_status()<CR>
+vmap <Enter> <Plug>(EasyAlign)
+
+"map <leader>we :e %% map <leader>se :sp %% map <leader>ve :vsp %% map <leader>te :tabe %%四个映射
+for i in range(1, 9)
+    exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
+    exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
+endfor
+
+nnoremap <silent> <A--> :call ZoomFont(0)<CR>
+nnoremap <silent> <A-=> :call ZoomFont(1)<CR>
+
+let g:linemovement_up="<M-k>"
+let g:linemovement_down="<M-j>"
+execute "nnoremap <silent> " . g:linemovement_up . " :m-2<CR>"
+execute "nnoremap <silent> " . g:linemovement_down . " :m+1<CR>"
+execute "inoremap <silent> " . g:linemovement_up . " <ESC>:m-2<CR>gi"
+execute "inoremap <silent> " . g:linemovement_down . " <ESC>:m+1<CR>gi"
+execute "vnoremap <silent> " . g:linemovement_up . " :call MoveBlockUp()<CR>"
+execute "vnoremap <silent> " . g:linemovement_down . " :call MoveBlockDown()<CR>"
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"命令模式+插入模式光标移动映射
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <A-b> <S-Left>
+cnoremap <A-f> <S-Right>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-k> <c-o>D
+
+cnoremap w!! w! !sudo tee % > /dev/null<CR>
+command! -nargs=* Rt redir => tmp | silent <args> | redir END | new | call append(0, split(tmp, '\n'))
+"}}}
+
+" leader映射 "{{{
+nnoremap <silent> <leader><CR> :source ~/.vimrc<CR>:exe 'AirlineTheme ' . airline_theme<CR>:redraw!<CR>:noh<CR>
+nnoremap <silent> <leader>a  :exe 'AirlineTheme ' . airline_theme<CR>:redraw!<CR>
+nnoremap <silent> <leader>ba :vert ball<CR>
+nnoremap <silent> <leader>bc :call BC()<CR>
+nnoremap <silent> <leader>bw :bw<CR>
+nnoremap <silent> <leader>bm :Bookmark<CR>
+nnoremap <silent> <leader>c  :!g++ -g %<CR>
+nnoremap <silent> <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <leader>cg :!g++ -g *.cpp<CR>
+nnoremap <silent> <leader>cs :COLORSCROLL<CR>
+nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<CR>
+nnoremap <silent> <leader>dq :exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:q!<CR>
+nnoremap <silent> <leader>D  :1,100 bwipeout<CR>
+nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
+nnoremap <silent> <leader>E :!idle %<CR>
+vnoremap <silent> <leader>fm :call SourceCodeFormat('v')<CR>
+nnoremap <silent> <leader>fm :call SourceCodeFormat('n')<CR>
+nnoremap <silent> <leader>fs :setlocal foldmethod=syntax<CR>
+nnoremap <silent> <Leader>fw [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nnoremap <silent> <leader>g  :call GotoDefine()<CR>
+nnoremap <silent> <leader>h  :set hlsearch! hlsearch?<CR>:echo<CR>
+nnoremap <silent> <leader>l  :set list! list?<CR>:echo<CR>
+nnoremap <silent> <leader>m  :vsp ~/.vimrc<CR>
+nnoremap <silent> <leader>M  :normal $m.%m.%<CR>
+nnoremap <silent> <leader>n  :bnext<CR>
+nnoremap <silent> <leader>N  :NERDTree<CR>
+nnoremap <silent> <leader>o  :only<CR>
+nnoremap <silent> <leader>O  :JavaSearchContext<CR>
+nnoremap <silent> <leader>p  :bprev<CR>
+nnoremap <silent> <leader>P  :setlocal paste!<CR>
+nnoremap <silent> <leader>PF :call Profile()<CR>
+nnoremap <silent> <leader>q  :q<CR>
+nnoremap <silent> <leader>r  :call SwitchScroll()<CR>
+nnoremap <silent> <leader>R  :call Run()<CR>
+nnoremap <silent> <leader>s  :sp<CR>
+nnoremap <silent> <leader>sv :sp<CR>:bn<CR>:vsp<CR>:bn<CR><c-w><c-j>:vsp<CR>:bn<CR>
+nnoremap <silent> <leader>st :call SwitchTheme()<CR>
+nnoremap <silent> <leader>sl :SignatureListMarks<CR>
+nnoremap <silent> <leader>so :set startofline! startofline?<CR>
+nnoremap <silent> <leader>sf :call SetFileType()<CR>
+nnoremap <leader>T  :call Translate("")<Left><Left>
+nnoremap <silent> <leader>tc :tabclose<CR>
+nnoremap <silent> <leader>te :tabedit <c-r>=expand("%:p:h")<CR>/<CR>
+nnoremap <silent> <leader>tl :Tagbar<CR>
+nnoremap <silent> <leader>tm :tabmove
+nnoremap <silent> <leader>tn :tabnew<CR>
+nnoremap <silent> <leader>to :tabonly<CR>
+nnoremap <silent> <leader>u  :UndotreeToggle<CR>:UndotreeFocus<CR>
+nnoremap <silent> <leader>v  :vsp<CR>
+nnoremap <leader>vd :vert diffsplit secondFileName<C-w>
+nnoremap <silent> <leader>w  :w<CR>
+nnoremap <silent> <leader>W  :set wrap! wrap?<CR>
+nnoremap <silent> <leader>ys  :YRShow<CR>
+nnoremap <leader>yc  :YRClear<CR>:echo 'Yankring cleared!'<CR>
+
+"}}}
+
+" 自动命令"{{{
+autocmd! FileType cpp,java setlocal foldmethod=syntax | setlocal foldlevel=100
+autocmd! FileType python set colorcolumn=0 | setlocal noexpandtab
+autocmd! BufReadPost ~/.vim/dotvim/rc/vimrc exe 'setlocal nomodifiable'
+autocmd! bufwritepost ~/.vimrc so % | exe 'AirlineTheme ' . airline_theme | exe 'noh'
+autocmd! ColorScheme * call HighlightSet()
+autocmd! BufWinEnter quickfix let g:lopen=bufnr('$')
+autocmd! BufWinLeave * if exists("g:lopen") && expand("<abuf>") == g:lopen | unlet! g:lopen | endif
+autocmd! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+"autocmd! FocusLost *.java :ProjectRefresh
+"autocmd! InsertLeave * se nocul" Normal mode nocul
+"autocmd! InsertEnter * se cul  " Insert mode cursorline
+"cnoremap %% <C-R>=expand('%:h').'/'<cr>    " %:h 获取当前路径
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"代码补全设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>        " ctrl_x_u_p连续按键
+autocmd Filetype cpp,java,javascript,jsp inoremap <buffer> . .<C-X><C-O><C-P>
+"autocmd Filetype java  set omnifunc=javacomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+
+vnoremap <silent> * :call VisualSelection('f')<CR>                              " Visual mode pressing * or # searches for the current selection
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"相对行号设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+":let i=0 | g/foo/s/foo/\=printf("%2d", i)/ | let i+=1                          " 插入递增数列
+nnoremap <silent> <C-n> :set relativenumber! relativenumber?<cr>:echo<CR>
+if (0)
+    autocmd InsertEnter * :set norelativenumber                                 " 插入模式下用绝对行号, 普通模式下用相对
+    autocmd InsertLeave * :set relativenumber
+    au FocusGained * :set relativenumber                                        " FocusGained=Gvim重新获得焦点 FocusLost=Gvim失去焦点
+    au FocusLost * :set norelativenumber
+endif
+"}}}
+
+"}}}
+
+" Function"{{{
+
+" VisualSelection use '#' and '*' "{{{
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+"}}}
+
+" use <M-j/k> move block and line easy"{{{
+function! MoveBlockUp() range
+    call MoveBlock(a:firstline, a:lastline, a:firstline-2)
+endfunction
+function! MoveBlockDown() range
+    call MoveBlock(a:firstline, a:lastline, a:lastline+1)
+endfunction
+function! MoveBlock(startline, endline, new_line_pos)
+    let s:cmd = a:startline . ',' . a:endline . ' move ' . a:new_line_pos
+    execute s:cmd
+    execute "normal! gv"
+endfunction
+"}}}
+
+" highlight set "{{{
+function! HighlightSet()
+    let color = g:colors_name
+    if (color == "solarized")
+        highlight Pmenu guifg=#005f87 guibg=#EEE8D5
+        highlight PmenuSel guifg=#AFD700 guibg=#106900
+    else
+        highlight Pmenu guifg=white guibg=#5f00af
+        "highlight PmenuSel guifg=Aqua guibg=Indigo
+        highlight PmenuSel guifg=#00FFFF guibg=#4B0082
+    endif
+    highlight CursorLine cterm=NONE ctermbg=darkgrey
+    highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+    highlight Cursor guifg=#EEEEEE guibg=#ff0f38
+endfunction
+call HighlightSet()
+"}}}
+
+" convert radix"{{{
+function! BC()
+    let i = inputdialog("输入进制 ")
+    if (i == '') 
+        return 
+    endif
+    let o = inputdialog("输出进制 ")
+    if (o == '')
+        return
+    endif
+    let num = inputdialog("转换数字 ")
+    if (num == '')
+        return
+    endif
+    if (getline('.') != '')
+        exe "normal Go"
+    endif
+    let cmdStr = "normal Iobase=" . o . ";ibase=" . i . ";" . num . "\<ESC>!!bc -lq\rI[" . num . "]\t" . i . "->" . o . "\tret = \<ESC>lv$yA \<ESC>"
+    exe cmdStr
+    if (bufname('%') == '')
+        exe "silent g/^$/d"
+    endif
+    if (o == 2)
+        let ret = @"
+        let cnt = len(ret) / 8
+        let start = 0
+        while start < (len(ret) % 8 == 0 ? cnt - 1 : cnt)
+            exe "normal 8hi \<ESC>2h"
+            let start +=1
+        endwhile
+    endif
+endfun
+"}}}
+
+" zoom font size"{{{
+function! ZoomFont(flag)
+    let currName = &guifont
+    let list = split(currName, '\s')
+    let fontName = ''
+    let start = 0
+    let len = len(list)
+    while start < len - 1
+        let fontName .= list[start] . ' '
+        let start += 1
+    endwhile
+    let size = list[len - 1]
+    if (a:flag == 1)
+        let size += 1
+    else
+        let size -= size == 1 ? 0 : 1
+    endif
+    let fontName .= size
+    let fontName = substitute(fontName, " ", "\\\\ ", "g")
+    let cmd = "set guifont=" . fontName
+    exe cmd
+endfunction
+"}}}
+
+" code format"{{{
+function! SourceCodeFormat(mode) range
+    let ft = &filetype
+    if (ft == 'js' || ft == 'json' || ft == 'javascript')
+        if (a:mode == 'v')
+            '<,'>call RangeJsBeautify()
+        else
+            call JsBeautify()
+        endif
+    elseif (ft == 'html')
+        if (a:mode == 'v')
+            '<,'>call RangeHtmlBeautify()
+        else
+            call HtmlBeautify()
+        endif
+    elseif (ft == 'css')
+        if (a:mode == 'v')
+            '<,'>call RangeCSSBeautify()
+        else
+            call CSSBeautify()
+        endif
+    elseif (ft == 'xml')
+        try
+            silent exe 's/>\s*</>\r</g'
+        catch /E486/
+        endtry
+    elseif (ft == 'python')
+        "http://lacusveris.com/PythonTidy/
+        set formatprg=~/.vim/dotvim/util/PythonTidy.py
+        :normal gggqG
+        set formatprg=
+    elseif (ft == 'cpp')
+        :normal gg=G``
+    else
+        :normal gg=G``
+    endif
+endfunction
+"}}}
+
+" run code"{{{
+function! Run()
+    let ft = &filetype
+    if (ft == 'js' || ft == 'javascript')
+        :!node %
+    elseif (ft == 'cpp')
+        :!./*.out
+    elseif (ft == 'clojure')
+        :%Eval
+    endif
+endfunction
+"}}}
+
+" Switch AirlineTheme"{{{
+let g:themes = [[0,'solarized','solarized'], [1,'molokai','molokai'], [2,'badwolf','badwolf'], [3,'bubblegum','bubblegum'], [4,'hybrid','hybrid'], [5,'kolor','kolor'], [6,'lucius','lucius'], [7,'luna','luna'], [8,'understated','understated'], [9,'wombat','wombat'], [10,'zenburn','zenburn'], [11,'base16','base16-atelierdune'], [12,'custom','solarized'], [13,'dark','darkZ'], [14,'jellybeans','jellybeans'], [15,'kalisi','kalisi'], [16,'laederon','solarized'], [17,'light','lightcolors'], [18,'monochrome','solarized'], [19,'murmur','solarized'], [20,'powerlineish','solarized'], [21,'serene','solarized'], [22,'simple','simple_b'], [23,'sol','sol'], [24,'tomorrow','solarized'], [25,'ubaryd','solarized']]
+function! SwitchTheme(...)
+    let l:idx = a:0 > 0 ? a:1 : -1
+    let l:max = len(g:themes) - 1
+    if (l:idx == -1)
+        for t in g:themes
+            echo t
+        endfor
+        let l:idx = input("select a theme[0-" . max . "]: ")
+    endif
+    if (l:idx >= 0 && l:idx <= max)
+        let theme = g:themes[l:idx][1]
+        let colo = g:themes[l:idx][2]
+        exe 'colo ' . colo
+        let g:airline_theme = theme
+        exe 'AirlineTheme ' . g:airline_theme
+        exe 'redraw!'
+    endif
+endfunction
+"}}}
+
+" Switch BackGround"{{{
+function! SwitchBackGround()
+    if (&bg=='dark') 
+        set bg=light 
+    else
+        set bg=dark 
+    endif
+    exe 'AirlineTheme ' . g:airline_theme|exe 'redraw!'
+endfunction
+"}}}
+
+" Switch filetype"{{{
+function! SetFileType()
+    let l:filetypes = [[1,'html'], [2,'css'], [3,'javascript'], [4,'vim'], [5,'cpp'], [6,'java'], [7,'jsp'], [8,'python']]
+    let l:max = len(l:filetypes)
+    echohl WarningMsg
+    for t in l:filetypes
+        echo t[0] . '-->' . t[1]
+    endfor
+    let l:idx = input("select a filetype[1-" . max . "]: ")
+    echohl None
+    if (l:idx >= 1 && l:idx <= max)
+        exe 'set ft='. filetypes[l:idx - 1][1]
+    endif
+endfunction
+"}}}
+
+" Random colorthemes"{{{
+function! RandomThemes(...)
+    let rAllColor = a:0 == ''
+    let all_colors = ['256-gra', '256-jungle', '3dglasses', 'adam', 'adaryn', 'adobe', 'adrian', 'advantage', 'af', 'aiseered', 'anotherdark', 'ansi_blows', 'aqua', 'ashen', 'asmanian_blood', 'astronaut', 'asu1dark', 'automation', 'autumnleaf', 'autumn', 'babymate256', 'badwolf', 'basic', 'baycomb', 'bayQua', 'bclear', 'beachcomber', 'beauty256', 'bensday', 'billw', 'biogoo', 'black_angus', 'blackbeauty', 'blackboard', 'blackdust', 'blacklight', 'BlackSea', 'blazer', 'blink', 'bluechia', 'bluegreen', 'blueprint', 'blueshift', 'blue', 'bluez', 'blugrine', 'bmichaelsen', 'bocau', 'bog', 'borland', 'breeze', 'brookstream', 'brown', 'bubblegum', 'busierbee', 'busybee', 'buttercream', 'bvemu', 'bw', 'calmar256-light', 'camo', 'campfire', 'candycode', 'candyman', 'candy', 'caramel', 'carrot', 'carvedwoodcool', 'carvedwood', 'chance-of-storm', 'charged-256', 'charon', 'chela_light', 'chlordane', 'ChocolateLiquor', 'ChocolatePapaya', 'chocolate', 'chrysoprase', 'ciscoacl', 'clarity', 'cleanphp', 'cloudy', 'clue', 'cobaltish', 'cobalt', 'codeblocks_dark', 'codeburn', 'CodeFactoryv3', 'codeschool', 'coffee', 'coldgreen', 'colorer', 'colorful256', 'colorful', 'colorscheme_template', 'colorzone', 'contrasty', 'cool', 'corn', 'corporation', 'cthulhian', 'custom', 'c', 'd8g_01', 'd8g_02', 'd8g_03', 'd8g_04', 'dante', 'darkblack', 'darkblue2', 'darkBlue', 'darkbone', 'darkburn', 'darkdot', 'darkeclipse', 'darkerdesert', 'darker-robin', 'darkocean', 'darkrobot', 'darkroom', 'dark-ruby', 'darkslategray', 'darkspectrum', 'darktango', 'darkzen', 'darkZ', 'dawn', 'delek', 'delphi', 'denim', 'derefined', 'desert256', 'desertedoceanburnt', 'desertedocean', 'desertEx', 'desert', 'detailed', 'devbox-dark-256', 'DevC++', 'deveiate', 'developer', 'django', 'donbass', 'doorhinge', 'doriath', 'dual', 'dull', 'dusk', 'earendel', 'earthburn', 'earth', 'eclipse', 'eclm_wombat', 'edo_sea', 'ego', 'ekin', 'ekvoli', 'elise', 'elisex', 'emacs', 'enzyme', 'evening_2', 'far', 'felipec', 'fine_blue', 'flatland', 'fnaqevan', 'fog', 'fokus', 'forneus', 'freya', 'frood', 'fruidle', 'fruit', 'fruity', 'fu', 'gardener', 'gemcolors', 'gentooish', 'getafe', 'getfresh', 'github', 'gobo', 'golded', 'golden', 'google', 'gor', 'gothic', 'grape', 'graywh', 'grb256', 'greens', 'greenvision', 'grey2', 'greyblue', 'gruvbox', 'guardian', 'guepardo', 'h80', 'habiLight', 'heliotrope', 'hemisu', 'herald', 'hornet', 'hybrid', 'iangenzo', 'ibmedit', 'icansee', 'impactG', 'impact', 'industrial', 'ingretu', 'inkpot', 'ir_black', 'ironman', 'jammy', 'jelleybeans', 'jellybeans', 'jellyx', 'jhdark', 'jhlight', 'jiks', 'kaltex', 'kalt', 'kate', 'kellys', 'khaki', 'kib_darktango', 'kib_plastic', 'kiss', 'kkruby', 'kolor', 'kruby', 'kyle', 'lazarus', 'legiblelight', 'leglight2', 'leo', 'less', 'lettuce', 'lightcolors', 'lilac', 'lilydjwg_dark', 'lilydjwg_green', 'lilypink', 'lingodirector', 'liquidcarbon', 'literal_tango', 'lodestone', 'louver', 'lucius', 'luinnar', 'luna', 'mac_classic', 'made_of_code', 'manuscript', 'manxome', 'marklar', 'maroloccio', 'mars', 'martin_krischik', 'matrix', 'mayansmoke', 'mdark', 'mellow', 'metacosm', 'midnight2', 'midnight', 'miko', 'mint', 'mizore', 'mod_tcsoft', 'molokai', 'Monokai-chris', 'Monokai', 'montz', 'mophiaDark', 'mophiaSmoke', 'moria', 'moss', 'motus', 'MountainDew', 'mrkn256', 'mrpink', 'mud', 'mustang', 'native', 'nature', 'navajo-night', 'navajo', 'nazca', 'nedit2', 'nedit', 'neon', 'neutron', 'neverness', 'nevfn', 'newspaper', 'newsprint', 'nicotine', 'nightflight2', 'nightflight', 'nightshimmer', 'nightsky', 'night', 'night_vision', 'nightVision', 'nightwish', 'no_quarter', 'northland', 'northsky', 'norwaytoday', 'nour', 'nuvola', 'obsidian2', 'obsidian', 'oceanblack256', 'oceanblack', 'oceandeep', 'oceanlight', 'olive', 'orange', 'osx_like', 'pacific', 'paintbox', 'PapayaWhip', 'peaksea', 'peppers', 'perfect', 'pf_earth', 'phd', 'phphaxor', 'phpx', 'pic', 'pink', 'pleasant', 'potts', 'print_bw', 'prmths', 'professional', 'proton', 'pspad', 'psql', 'putty', 'pw', 'pyte', 'python', 'quagmire', 'railscasts', 'rainbow_fine_blue', 'rainbow_fruit', 'rainbow_neon', 'random', 'rastafari', 'rcg_gui', 'rcg_term', 'rdark-terminal', 'rdark', 'redblack', 'redstring', 'refactor', 'relaxedgreen', 'reliable', 'reloaded', 'revolutions', 'robinhood', 'rootwater', 'rtl', 'sand', 'satori', 'scala', 'scite', 'sean', 'seashell', 'sea', 'selenitic', 'seoul', 'settlemyer', 'sf', 'shadesofamber', 'shobogenzo', 'sienna', 'sift', 'silent', 'simple256', 'simpleandfriendly', 'simple_b', 'simplewhite', 'skittles_dark', 'smp', 'smyck', 'softbluev2', 'softblue', 'softlight', 'solarized', 'sonofobsidian', 'sorcerer', 'soso', 'southernlights', 'southwest-fog', 'spectro', 'spiderhawk', 'spring', 'stackoverflow', 'stingray', 'strawimodo', 'summerfruit256', 'summerfruit', 'surveyor', 'symfony', 'synic', 'tabula', 'tango2', 'tango-desert', 'tango-morning', 'tangoshady', 'tango', 'taqua', 'tchaba', 'tcsoft', 'telstar', 'tesla', 'tetragrammaton', 'textmate16', 'thegoodluck', 'thestars', 'thor', 'tibet', 'tidy', 'tir_black', 'tolerable', 'tomatosoup', 'Tomorrow-Night-Blue', 'Tomorrow-Night-Bright', 'Tomorrow-Night-Eighties', 'Tomorrow-Night', 'Tomorrow', 'tony_light', 'toothpik', 'torte', 'transparent', 'trivial256', 'trogdor', 'turbo', 'tutticolori', 'twilight256', 'twilight', 'two2tango', 'umber-green', 'understated', 'underwater-mod', 'underwater', 'up', 'vanzan_color', 'vcbc', 'vc', 'vexorian', 'vibrantink', 'vilight', 'vividchalk', 'vj', 'void', 'vydark', 'vylight', 'wargrey', 'warm_grey', 'watermark', 'whitebox', 'whitedust', 'widower', 'win9xblueback', 'wintersday', 'winter', 'wombat256mod', 'wombat256', 'wombat', 'wood', 'wuye', 'xemacs', 'xian', 'xmaslights', 'xoria256', 'xterm16', 'yaml', 'yeller', 'zazen', 'zenburn', 'zenesque', 'zen', 'zephyr', 'zmrok']
+    let themes = ['solarized', 'molokai', 'badwolf', 'bubblegum', 'hybrid', 'kolor', 'lucius', 'luna', 'understated', 'wombat', 'zenburn', 'base16', 'custom', 'dark', 'jellybeans', 'kalisi', 'laederon', 'light', 'monochrome', 'murmur', 'powerlineish', 'serene', 'simple', 'sol', 'tomorrow', 'ubaryd']
+    let less_colors = ['solarized', 'molokai', 'badwolf', 'bubblegum', 'hybrid', 'kolor', 'lucius', 'luna', 'understated', 'wombat', 'zenburn', 'base16-atelierdune', 'solarized', 'darkZ', 'jellybeans', 'kalisi', 'solarized', 'lightcolors', 'solarized', 'solarized', 'solarized', 'solarized', 'simple_b', 'sol', 'solarized', 'solarized']
+    let cr = system("python -c 'import random;print random.randint(0, 490)'")
+    let tr = system("python -c 'import random;print random.randint(0, 25)'")
+    if (rAllColor)
+        let colo = all_colors[cr]
+    else
+        let colo = less_colors[tr]
+    endif
+    let theme = themes[tr]
+    exe 'colo ' . colo
+    let g:airline_theme = theme
+    exe 'AirlineTheme ' . g:airline_theme
+    exe 'redraw!'
+    call HighlightSet()
+    echohl WarningMsg | echo 'AirlineTheme[' . g:airline_theme . '] & color[' . g:colors_name .']' | echohl None
+endf
+"}}}
+
+" preview fold lines"{{{
+function! PreviewFold()
+    let sn = foldclosed(line('.'))
+    if (sn > 0)
+        if (exists("g:op") && (g:op == 1))
+            let g:op=0
+        else
+            let en = foldclosedend(line('.'))
+            let a:lt = getline(sn, en)
+            let a:cnt = 0
+            echohl String
+            for str in a:lt
+                echo sn . ' ' . str
+                let sn+=1
+            endfor
+            let g:op = 1
+        endif
+    endif
+    echohl None
+endfunction
+"}}}
+
+" plugin toggles" {{{
+" rainbow parentheses" {{{
+function! ToggleRainbow()
+    exe 'RainbowParenthesesToggle'
+    exe 'RainbowParenthesesLoadRound'
+    exe 'RainbowParenthesesLoadSquare'
+    exe 'RainbowParenthesesLoadBraces'
+    exe 'RainbowParenthesesLoadChevrons'
+endfunction
+"}}}
+
+" location list" {{{
+function! ToggleLoc()
+    if(exists("g:lopen"))
+        silent! lclose
+    else
+        silent! lopen 10
+    endif
+endfunction
+"}}}
+
+" ycm auto trigger" {{{
+function! ToggleYcm()
+    let a:is_on = g:ycm_auto_trigger
+    let g:ycm_auto_trigger = (a:is_on == 0) ? 1 : 0
+    echohl moreMsg
+    echo "ycm_auto_trigger: " . ((a:is_on == 0) ? "On " : "Off ")
+    echohl NONE
+endfunction
+"}}}
+"}}}
+
+" sdcv translate" {{{
+function! Translate(...)
+    let word = (a:1 == '') ? expand("<cword>") : a:1
+    let ret=system('sdcv -n ' . word)
+    let ret = substitute(substitute(ret, "\!\[CDATA\[", "", "g"), "\]\]", "", "g")
+    echo ret
+endfunction
+"}}}
+
+" Goto Define" {{{
+function! GotoDefine()
+    let ft = &filetype
+    if (ft == 'javascript' || ft == 'js')
+        :TernDef
+    else
+        :YcmCompleter GoToDefinitionElseDeclaration
+    endif
+endfunction
+"}}}
+
+" ctrl right scrollBar " {{{
+function! SwitchScroll()
+    let op = &guioptions
+    if (op =~ 'r')
+        set guioptions-=r
+    else
+        set guioptions+=r
+    endif
+endfunction
+"}}}
+
+"profile functions time "{{{
+function! Profile()
+    let l:options = [[1,'start'], [2,'pause'], [3,'continue'], [4,'quit']]
+    let l:max = len(l:options)
+    echohl WarningMsg
+    for opt in l:options
+        echo opt[0] . '-->' . opt[1]
+    endfor
+    let l:idx = input("select an option[1-" . max . "]: ")
+    echohl None
+
+    if (l:idx >= 1 && l:idx <= max)
+        if(idx == 1)
+            :exe ":profile start " . $HOME . "/profile.log"
+            :exe ":profile func *"
+            :exe ":profile file *"
+        elseif(idx == 2)
+            :exe ":profile pause"
+        elseif(idx == 3)
+            :exe ":profile continue"
+        else
+            :exe ":profile pause"
+            :noautocmd qall!
+        endif
+    endif
+endfunction
+"}}}
+
+"}}}
+
