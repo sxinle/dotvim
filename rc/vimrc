@@ -22,7 +22,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'godlygeek/tabular'
 Plugin 'osyo-manga/vim-over'
 Plugin 'bling/vim-airline' "{{{
-set guifont=Monaco\ for\ Powerline:h13
+set guifont=Monaco\ for\ Powerline:h12
 "set guifont=Droid\ Sans\ Mono\ Awesome:h15
 let g:airline_powerline_fonts=1                         " 使用powerline的字体
 let g:airline#extensions#tabline#left_alt_sep='¦'       " ¦
@@ -210,6 +210,7 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 nnoremap <silent> <A-o> :call ToggleRainbow()<CR>
+nnoremap <silent> ø :call ToggleRainbow()<CR>
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -451,6 +452,19 @@ nnoremap <silent> <A-l> :bnex<CR>
 nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
+
+"for mac - -!"{{{
+!nmap <silent> ƒ :call PreviewFold()<CR>
+nnoremap <silent> ® :call RandomThemes(1)<CR>
+nnoremap <silent> µ :Tagbar<CR>:NERDTreeToggle<CR><C-w>l
+nnoremap <silent> ˙ :bprev<CR>
+nnoremap <silent> <D-h> :bprev<CR>
+nnoremap <silent> ¬ :bnex<CR>
+nnoremap <silent> ≥ :lne<CR>
+nnoremap <silent> ≤ :lp<CR>
+nnoremap <silent> <D-i> :call SwitchBackGround()<CR>
+"}}}
+
 nnoremap <silent> <leader>+  :%!awk '{print; sum+=($1);}END{print "\nsum="sum}'<CR>
 nnoremap <silent> <leader>- <C-W>_<C-W>\|            "\- 分割窗口最大化
 nnoremap <silent> <leader>= <C-W>=                   "\= 分割窗口等大
@@ -460,6 +474,7 @@ vmap <Enter> <Plug>(EasyAlign)
 "map <leader>we :e %% map <leader>se :sp %% map <leader>ve :vsp %% map <leader>te :tabe %%四个映射
 for i in range(1, 9)
     exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
+    exec 'nnoremap <silent> <D-' . i . '> '. i .'gt'
     exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
 endfor
 
@@ -487,7 +502,9 @@ cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <A-b> <S-Left>
+cnoremap ∫ <S-Left>
 cnoremap <A-f> <S-Right>
+cnoremap ƒ <S-Right>
 inoremap <C-a> <C-o>^
 inoremap <C-e> <End>
 inoremap <C-f> <Right>
