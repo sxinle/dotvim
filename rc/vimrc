@@ -454,7 +454,7 @@ nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
 
 "for mac - -!"{{{
-!nmap <silent> ƒ :call PreviewFold()<CR>
+nnoremap <silent> ƒ :call PreviewFold()<CR>
 nnoremap <silent> ® :call RandomThemes(1)<CR>
 nnoremap <silent> µ :Tagbar<CR>:NERDTreeToggle<CR><C-w>l
 nnoremap <silent> ˙ :bprev<CR>
