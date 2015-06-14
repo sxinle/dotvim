@@ -410,6 +410,7 @@ endif
 nnoremap <silent><F1> :call ToggleLoc()<CR>
 xmap <F2> <Plug>NrrwrgnDo
 "Edit file "/usr/lib/python2.7/json/tool.py" (python --version 确定默认python版本)
+"mac path "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/tool.py"
 "step1=>main函数前添加
 "reload(sys)
 "sys.setdefaultencoding('utf-8')
