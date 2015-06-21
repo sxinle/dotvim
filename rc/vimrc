@@ -71,6 +71,7 @@ endif
 Plugin 'majutsushi/tagbar' "{{{
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
+let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
 "}}}
 Plugin 'mhinz/vim-startify' "{{{
 autocmd VimEnter *
