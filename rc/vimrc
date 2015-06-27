@@ -370,7 +370,7 @@ if has('gui_running')
     if has('win32')
         au GUIEnter * simalt ~x
     else
-        set lines=58 columns=180
+        set lines=58 columns=280
     endif
 endif
 
