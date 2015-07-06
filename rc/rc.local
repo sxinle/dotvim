@@ -3,9 +3,14 @@ source ~/.vim/dotvim/rc/vimrc
 try
     if (has('gui_running'))
         "let g:themes[0] = [0,'murmur','badwolf']
-        call SwitchTheme(0)
+        call SwitchTheme(7)
         "call RandomThemes(1)
     endif
 catch
 endtry
 
+Plugin 'rizzatti/dash.vim'
+
+if(has('gui_macvim'))
+    set transparency=10
+endif
