@@ -231,6 +231,7 @@ let g:EasyGrepWindow=1
 "let g:EasyGrepCommand = 1   " use external grep has no result
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
+Plugin 'rizzatti/dash.vim'
 
 filetype plugin indent on     " *required!
 "}}}
