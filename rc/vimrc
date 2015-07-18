@@ -340,7 +340,7 @@ if has('unnamedplus')               " 使用系统剪切板(需要编译时加�
 else                                " 类似Map <C-c>,<C-v>
     set clipboard+=unnamed
     vnoremap y "+y
-    nnoremap p "+gP
+    nnoremap p "+gp
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
