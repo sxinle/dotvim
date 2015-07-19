@@ -2,7 +2,7 @@ source ~/.vim/dotvim/rc/vimrc
 
 try
     if (has('gui_running'))
-        call SwitchTheme(7)
+        call SwitchTheme(0)
     else
         "call SwitchTheme(0)
     endif
