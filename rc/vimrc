@@ -4,7 +4,7 @@ endif
 let g:dotvim_settings = {}
 let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 
-" Vundle"{{{
+" Vundle "{{{
 
 filetype off                   " *required!
 set rtp+=~/.vim/bundle/vundle/
@@ -68,7 +68,8 @@ elseif executable('file')
     let g:ctrlp_user_command = 'find %s -type f'
 endif
 "}}}
-Plugin 'majutsushi/tagbar' "{{{
+"Plugin 'majutsushi/tagbar'
+Plugin 'vladh/tagbar' "{{{  support clojure
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
 let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
@@ -236,7 +237,7 @@ Plugin 'rizzatti/dash.vim'
 filetype plugin indent on     " *required!
 "}}}
 
-" Coniguration"{{{
+" Coniguration "{{{
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 一般设定
@@ -272,6 +273,10 @@ else
 endif
 
 let &guicursor = &guicursor . ",a:blinkon0"             " 禁用光标闪烁
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"            " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"            " Block in normal mode
+endif
 set viewoptions=folds,options,cursor,unix,slash         " Better Unix / Windows compatibility
 set wildignore=*.swp,*.bak,*.pyc,*.class                " <CTRL_x-f>文件名补全忽略的文件后缀
 exe "set viminfo='50,<1000,s100,%,/50,n" . g:dotvim_settings.local_path . "viminfo"
@@ -406,7 +411,7 @@ endif
 
 "}}}
 
-" Mapping"{{{
+" Mapping "{{{
 
 " F-n Keymap"{{{
 nnoremap <silent><F1> :call ToggleLoc()<CR>
@@ -424,7 +429,7 @@ nmap <F4> <Plug>ToggleGoldenViewAutoResize
 nnoremap <silent> <F5> :AirlineToggle<CR>
 nnoremap <silent> <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR> :exe 'AirlineTheme ' . airline_theme<CR> :redraw!<CR>
 nnoremap <F7> :call ToggleYcm()<CR>
-"nnoremap <F9> :!ctags -R *<CR>                                            " 普通文件tags
+nnoremap <F9> :!ctags -R *<CR>                                            " 普通文件tags
 "nnoremap <F10> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *<CR>    " C++文件tags
 "}}}
 
@@ -621,7 +626,7 @@ endif
 
 "}}}
 
-" Function"{{{
+" Function "{{{
 
 " VisualSelection use '#' and '*' "{{{
 function! VisualSelection(direction) range
@@ -938,7 +943,7 @@ function! SwitchScroll()
 endfunction
 "}}}
 
-"profile functions time "{{{
+" profile functions time "{{{
 function! Profile()
     let l:options = [[1,'start'], [2,'pause'], [3,'continue'], [4,'quit']]
     let l:max = len(l:options)
@@ -964,6 +969,57 @@ function! Profile()
         endif
     endif
 endfunction
+"}}}
+
+" Clojure fold "{{{
+"---------------------------------------------------------------------------
+" Automagic Clojure folding on defn's and defmacro's
+"
+" Blog post: http://writequit.org/blog/?p=413
+
+function! GetClojureFold()
+    if getline(v:lnum) =~ '^\s*(defn.*\s'
+        return ">1"
+    elseif getline(v:lnum) =~ '^\s*(def\(macro\|method\|page\|partial\).*\s'
+        return ">1"
+    elseif getline(v:lnum) =~ '^\s*(defmethod.*\s'
+        return ">1"
+    elseif getline(v:lnum) =~ '^\s*$'
+        let my_cljnum = v:lnum
+        let my_cljmax = line("$")
+
+        while (1)
+            let my_cljnum = my_cljnum + 1
+            if my_cljnum > my_cljmax
+                return "<1"
+            endif
+
+            let my_cljdata = getline(my_cljnum)
+
+            " If we match an empty line, stop folding
+            if my_cljdata =~ '^$'
+                return "<1"
+            else
+                return "="
+            endif
+        endwhile
+    else
+        return "="
+    endif
+endfunction
+
+function! TurnOnClojureFolding()
+    setlocal foldexpr=GetClojureFold()
+    setlocal foldmethod=expr
+endfunction
+
+" Simplify the fold display
+function! MinimalFoldText()
+    return getline(v:foldstart)
+endfunction
+set foldtext=MinimalFoldText()
+
+autocmd FileType clojure call TurnOnClojureFolding()
 "}}}
 
 "}}}
