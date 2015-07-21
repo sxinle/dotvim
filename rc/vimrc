@@ -915,7 +915,8 @@ endfunction
 " sdcv translate" {{{
 function! Translate(...)
     let word = (a:1 == '') ? expand("<cword>") : a:1
-    let ret=system('sdcv -n ' . word)
+    "let ret=system('sdcv -n ' . word)
+    let ret=system('dict.py ' . word)
     let ret = substitute(substitute(ret, "\!\[CDATA\[", "", "g"), "\]\]", "", "g")
     echo ret
 endfunction
