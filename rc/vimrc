@@ -265,6 +265,7 @@ set shortmess=aoOtTI                " message显示缩写,不显示欢迎界面
 set keywordprg=                     " :help <S-k>默认查找的帮助页
 set iskeyword+=_,$,@,%,#,-          " 带有如下符号的单词不要被换行分割
 set completeopt-=preview
+set dictionary+=~/.vim/dotvim/util/clj.dic
 set dictionary+=~/.vim/dotvim/util/en.dic
 if (has('gui_running'))
     colo blackboard
@@ -460,6 +461,7 @@ nnoremap <silent> <A-l> :bnex<CR>
 nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
+nnoremap <silent> <S-k> :call DashDoc()<CR>
 
 "for mac - -!"{{{
 nnoremap <silent> ƒ :call PreviewFold()<CR>
@@ -858,7 +860,7 @@ function! RandomThemes(...)
 endf
 "}}}
 
-" preview fold lines"{{{
+" preview fold lines "{{{
 function! PreviewFold()
     let sn = foldclosed(line('.'))
     if (sn > 0)
@@ -1021,6 +1023,15 @@ endfunction
 set foldtext=MinimalFoldText()
 
 autocmd FileType clojure call TurnOnClojureFolding()
+"}}}
+
+" Clojure Doc "{{{
+function! DashDoc()
+    let ft = &filetype
+    if (ft == 'clojure')
+        :Dash <cword>
+    endif
+endfunction
 "}}}
 
 "}}}
