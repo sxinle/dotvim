@@ -5,7 +5,7 @@ try
         call SwitchTheme(0)
         highlight clojureError term=undercurl ctermfg=15 ctermbg=4 gui=undercurl guifg=White guibg=Red
     else
-        colo wombat256
+        "colo wombat256
         highlight CursorLine cterm=NONE ctermbg=NONE
     endif
     "call RandomThemes(1)
