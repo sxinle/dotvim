@@ -2,7 +2,7 @@ source ~/.vim/dotvim/rc/vimrc
 
 try
     if (has('gui_running'))
-        call SwitchTheme(0)
+        call SwitchTheme(7)
         highlight clojureError term=undercurl ctermfg=15 ctermbg=4 gui=undercurl guifg=White guibg=Red
     else
         "colo wombat256
