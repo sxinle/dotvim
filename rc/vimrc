@@ -587,7 +587,7 @@ nnoremap <leader>yc  :YRClear<CR>:echo 'Yankring cleared!'<CR>
 
 " 自动命令"{{{
 autocmd! FileType cpp,java setlocal foldmethod=syntax | setlocal foldlevel=100
-"autocmd! FileType python set colorcolumn=0 | setlocal noexpandtab
+autocmd! FileType python set colorcolumn=0 " | setlocal noexpandtab
 autocmd! BufReadPost ~/.vim/dotvim/rc/vimrc exe 'setlocal nomodifiable'
 autocmd! bufwritepost ~/.vimrc so % | exe 'AirlineTheme ' . airline_theme | exe 'noh'
 autocmd! ColorScheme * call HighlightSet()
