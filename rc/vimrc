@@ -136,7 +136,8 @@ nmap <silent> n <Plug>(anzu-n-with-echo)zz
 nmap <silent> N <Plug>(anzu-N-with-echo)zz
 "}}}
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe' "{{{
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'oblitum/YouCompleteMe' "{{{
 let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_always_populate_location_list=1
