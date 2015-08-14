@@ -38,10 +38,10 @@ let g:airline_theme='custom'
 "let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
-Plugin 'justinmk/vim-sneak' "{{{
-let g:sneak#streak = 1
-let g:sneak#s_next = 1
-"}}}
+"Plugin 'justinmk/vim-sneak' "{{{
+"let g:sneak#streak = 1
+"let g:sneak#s_next = 1
+""}}}
 Plugin 'scrooloose/nerdtree' "{{{
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowBookmarks=1
@@ -69,7 +69,7 @@ elseif executable('file')
 endif
 "}}}
 "Plugin 'majutsushi/tagbar'
-Plugin 'vladh/tagbar' "{{{  support clojure
+Plugin 'vladh/tagbar' "{{{ clojure support
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
 let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
@@ -798,6 +798,8 @@ function! Run()
         :!./*.out
     elseif (ft == 'clojure')
         :%Eval
+    elseif (ft == 'php')
+        :!php -l %
     endif
 endfunction
 "}}}
@@ -837,7 +839,7 @@ endfunction
 
 " Switch filetype"{{{
 function! SetFileType()
-    let l:filetypes = [[1,'html'], [2,'css'], [3,'javascript'], [4,'vim'], [5,'cpp'], [6,'java'], [7,'jsp'], [8,'python']]
+    let l:filetypes = [[1,'html'], [2,'css'], [3,'javascript'], [4,'vim'], [5,'cpp'], [6,'java'], [7,'jsp'], [8,'python'], [9, 'php']]
     let l:max = len(l:filetypes)
     echohl WarningMsg
     for t in l:filetypes
@@ -847,6 +849,8 @@ function! SetFileType()
     echohl None
     if (l:idx >= 1 && l:idx <= max)
         exe 'set ft='. filetypes[l:idx - 1][1]
+    else
+        exe 'set ft='. l:idx
     endif
 endfunction
 "}}}
