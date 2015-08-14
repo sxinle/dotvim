@@ -233,6 +233,18 @@ let g:EasyGrepWindow=1
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
 Plugin 'rizzatti/dash.vim'
+Plugin 'stephpy/vim-php-cs-fixer' "{{{
+" If php-cs-fixer is in $PATH, you don't need to define line below
+let g:php_cs_fixer_path = "/usr/local/homebrew/Cellar/php-cs-fixer/1.10/libexec/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_level = "symfony"              " which level ?
+let g:php_cs_fixer_config = "default"             " configuration
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information."
+"}}}
 
 filetype plugin indent on     " *required!
 "}}}
@@ -769,6 +781,8 @@ function! SourceCodeFormat(mode) range
         set formatprg=
     elseif (ft == 'cpp')
         :normal gg=G``
+    elseif (ft == 'php')
+        :call PhpCsFixerFixFile()
     else
         :normal gg=G``
     endif
