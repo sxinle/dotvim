@@ -4,7 +4,7 @@ endif
 let g:dotvim_settings = {}
 let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 
-" Vundle "{{{
+" [Plug] "{{{
 
 filetype off                   " *required!
 set rtp+=~/.vim/bundle/vundle/
@@ -250,7 +250,7 @@ let g:php_cs_fixer_verbose = 0                    " Return the output of command
 filetype plugin indent on     " *required!
 "}}}
 
-" Coniguration "{{{
+" [Conf] "{{{
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 一般设定
@@ -425,7 +425,7 @@ endif
 
 "}}}
 
-" Mapping "{{{
+" [Maps] "{{{
 
 " F-n Keymap"{{{
 nnoremap <silent><F1> :call ToggleLoc()<CR>
@@ -474,7 +474,6 @@ nnoremap <silent> <A-l> :bnex<CR>
 nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
-nnoremap <silent> <S-k> :call DashDoc()<CR>
 
 "for mac - -!"{{{
 nnoremap <silent> ƒ :call PreviewFold()<CR>
@@ -601,6 +600,7 @@ nnoremap <leader>yc  :YRClear<CR>:echo 'Yankring cleared!'<CR>
 " 自动命令"{{{
 autocmd! FileType cpp,java setlocal foldmethod=syntax | setlocal foldlevel=100
 autocmd! FileType python set colorcolumn=0 " | setlocal noexpandtab
+autocmd! FileType python,php,clojure nnoremap <buffer> <S-k> :Dash <cword><CR>
 autocmd! BufReadPost ~/.vim/dotvim/rc/vimrc exe 'setlocal nomodifiable'
 autocmd! bufwritepost ~/.vimrc so % | exe 'AirlineTheme ' . airline_theme | exe 'noh'
 autocmd! ColorScheme * call HighlightSet()
@@ -641,7 +641,7 @@ endif
 
 "}}}
 
-" Function "{{{
+" [Func] "{{{
 
 " VisualSelection use '#' and '*' "{{{
 function! VisualSelection(direction) range
@@ -687,6 +687,7 @@ function! HighlightSet()
     highlight CursorLine cterm=NONE ctermbg=darkgrey
     highlight CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
     highlight Cursor guifg=#EEEEEE guibg=#ff0f38
+    highlight clojureError term=undercurl ctermfg=15 ctermbg=4 gui=undercurl guifg=White guibg=Red
 endfunction
 call HighlightSet()
 "}}}
@@ -1042,15 +1043,6 @@ endfunction
 set foldtext=MinimalFoldText()
 
 autocmd FileType clojure call TurnOnClojureFolding()
-"}}}
-
-" Clojure Doc "{{{
-function! DashDoc()
-    let ft = &filetype
-    if (ft == 'clojure')
-        :Dash <cword>
-    endif
-endfunction
 "}}}
 
 "}}}
