@@ -12,7 +12,7 @@ mkdir -p $VIM_LOCAL_PATH"yankring"
 
 # local config
 touch $VIM_LOCAL_PATH"vimrc.local"
-cat ~/.vim/dotvim/rc/vimrc.local > $VIM_LOCAL_PATH"vimrc.local"
+cat ~/.vim/dotvim/rc/rc.local > $VIM_LOCAL_PATH"vimrc.local"
 
 # YouCompleteme
 cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py $VIM_LOCAL_PATH"ycm_extra_conf.py"
