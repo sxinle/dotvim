@@ -24,7 +24,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'osyo-manga/vim-over'
 Plugin 'bling/vim-airline' "{{{
 "set guifont=Monaco\ for\ Powerline:h12
-set guifont=Monaco_Linux-Airline\ 10
+set guifont=Monaco_Linux-Airline\ 9
 "set guifont=Droid\ Sans\ Mono\ Awesome:h15
 let g:airline_powerline_fonts=1                         " 使用powerline的字体
 let g:airline#extensions#tabline#left_alt_sep='¦'       " ¦
