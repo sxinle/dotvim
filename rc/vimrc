@@ -23,8 +23,11 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'godlygeek/tabular'
 Plugin 'osyo-manga/vim-over'
 Plugin 'bling/vim-airline' "{{{
-"set guifont=Monaco\ for\ Powerline:h12
-set guifont=Monaco_Linux-Airline\ 9
+if (has('gui_macvim'))
+    set guifont=Monaco\ for\ Powerline:h12
+else
+    set guifont=Monaco_Linux-Airline\ 9
+endif
 "set guifont=Droid\ Sans\ Mono\ Awesome:h15
 let g:airline_powerline_fonts=1                         " 使用powerline的字体
 let g:airline#extensions#tabline#left_alt_sep='¦'       " ¦
