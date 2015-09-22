@@ -577,6 +577,7 @@ nnoremap <silent> <leader>p  :bprev<CR>
 nnoremap <silent> <leader>P  :setlocal paste!<CR>
 nnoremap <silent> <leader>PF :call Profile()<CR>
 nnoremap <silent> <leader>q  :q<CR>
+nnoremap <silent> <leader><leader>q  :1,10 bwipeout!<CR>:q<CR>
 nnoremap <silent> <leader>r  :call SwitchScroll()<CR>
 nnoremap <silent> <leader>R  :call Run()<CR>
 nnoremap <silent> <leader>s  :sp<CR>
