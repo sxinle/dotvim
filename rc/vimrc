@@ -858,7 +858,9 @@ function! SetFileType()
     if (l:idx >= 1 && l:idx <= max)
         exe 'set ft='. filetypes[l:idx - 1][1]
     else
-        exe 'set ft='. l:idx
+        if(l:idx != '')
+            exe 'set ft='. l:idx
+        endif
     endif
 endfunction
 "}}}
