@@ -496,7 +496,7 @@ nnoremap <silent> <leader>+  :%!awk '{print; sum+=($1);}END{print "\nsum="sum}'<
 nnoremap <silent> <leader>- <C-W>_<C-W>\|            "\- 分割窗口最大化
 nnoremap <silent> <leader>= <C-W>=                   "\= 分割窗口等大
 nnoremap <silent> <leader><Space> :noh<CR>:call anzu#clear_search_status()<CR>
-vmap <Enter> <Plug>(EasyAlign)
+vmap <Enter> <Plug>(LiveEasyAlign)
 
 "map <leader>we :e %% map <leader>se :sp %% map <leader>ve :vsp %% map <leader>te :tabe %%四个映射
 for i in range(1, 9)
