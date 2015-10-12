@@ -559,7 +559,7 @@ nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<
 nnoremap <silent> <leader>dq :exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:q!<CR>
 nnoremap <silent> <leader>D  :1,100 bwipeout<CR>
 nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
-nnoremap <silent> <leader>E :!idle %<CR>
+nnoremap <leader>E  :call URLEncode("")<left><left>
 vnoremap <silent> <leader>fm :call SourceCodeFormat('v')<CR>
 nnoremap <silent> <leader>fm :call SourceCodeFormat('n')<CR>
 nnoremap <silent> <leader>fs :setlocal foldmethod=syntax<CR>
@@ -1051,6 +1051,17 @@ endfunction
 set foldtext=MinimalFoldText()
 
 autocmd FileType clojure call TurnOnClojureFolding()
+"}}}
+
+" GBK encode "{{{
+function! URLEncode(...)
+    "gbk URLEncode
+    let word = (a:1 == '') ? expand("<cword>") : a:1
+    let ret = system('python -c "import urllib;str=\"'.word.'\";d ={\"ret\":str.decode(\"utf8\").encode(\"gbk\")};print urllib.urlencode(d,\"gbk\");"')
+    let cmdStr = "normal Go".word."(GBK URLEncode)-->".ret."\<ESC>F=lvEy"
+    exe cmdStr
+    echo "[".word."]编码结果已经复制"
+endfunction
 "}}}
 
 "}}}
