@@ -559,7 +559,7 @@ nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<
 nnoremap <silent> <leader>dq :exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:q!<CR>
 nnoremap <silent> <leader>D  :1,100 bwipeout<CR>
 nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
-nnoremap <leader>E  :call URLEncode("")<left><left>
+nnoremap <leader>E  :call URLEncoder("","de","u8")<left><left>
 vnoremap <silent> <leader>fm :call SourceCodeFormat('v')<CR>
 nnoremap <silent> <leader>fm :call SourceCodeFormat('n')<CR>
 nnoremap <silent> <leader>fs :setlocal foldmethod=syntax<CR>
@@ -1053,14 +1053,25 @@ set foldtext=MinimalFoldText()
 autocmd FileType clojure call TurnOnClojureFolding()
 "}}}
 
-" GBK encode "{{{
-function! URLEncode(...)
-    "gbk URLEncode
-    let word = (a:1 == '') ? expand("<cword>") : a:1
-    let ret = system('python -c "import urllib;str=\"'.word.'\";d ={\"ret\":str.decode(\"utf8\").encode(\"gbk\")};print urllib.urlencode(d,\"gbk\");"')
-    let cmdStr = "normal Go".word."(GBK URLEncode)-->".ret."\<ESC>F=lvEy"
-    exe cmdStr
-    echo "[".word."]编码结果已经复制"
+" GBK encode/decode "{{{
+function! URLEncoder(...)
+    if (a:2 == '')
+        "gbk URLEncode
+        let word = (a:1 == '') ? expand("<cword>") : a:1
+        let ret = system('python -c "import urllib;str=\"'.word.'\";d ={\"ret\":str.decode(\"utf8\").encode(\"gbk\")};print urllib.urlencode(d,\"gbk\");"')
+        let cmdStr = "normal Go".word."(GBK URLEncode)-->".ret."\<ESC>F=lvEy"
+        exe cmdStr
+    else
+        let word = @"
+        let word = substitute(word, "\n", "", "g")
+        if(a:3 != '')
+            let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str);"')
+        else 
+            let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str).decode(\"gbk\").encode(\"utf8\")"')
+        endif
+        let cmdStr = "normal Go".ret."\<ESC>Vy"
+        exe cmdStr
+    endif
 endfunction
 "}}}
 
