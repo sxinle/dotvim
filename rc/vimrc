@@ -808,6 +808,8 @@ function! Run()
         :%Eval
     elseif (ft == 'php')
         :!php -l %
+    elseif (ft == 'lisp')
+        :!clisp %
     endif
 endfunction
 "}}}
