@@ -574,6 +574,7 @@ nnoremap <silent> <leader>N  :NERDTree<CR>
 nnoremap <silent> <leader>o  :only<CR>
 nnoremap <silent> <leader>O  :JavaSearchContext<CR>
 nnoremap <silent> <leader>p  :bprev<CR>
+nnoremap <silent> <leader><leader>p :call AutoPairsToggle()<CR>
 nnoremap <silent> <leader>P  :setlocal paste!<CR>
 nnoremap <silent> <leader>PF :call Profile()<CR>
 nnoremap <silent> <leader>q  :q<CR>
