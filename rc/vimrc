@@ -605,6 +605,7 @@ nnoremap <leader>yc  :YRClear<CR>:echo 'Yankring cleared!'<CR>
 "}}}
 
 " 自动命令"{{{
+autocmd! FileType lisp let g:AutoPairs={'(':')', '[':']', '{':'}','"':'"', '`':'`'}
 autocmd! FileType cpp,java setlocal foldmethod=syntax | setlocal foldlevel=100
 autocmd! FileType python set colorcolumn=0 " | setlocal noexpandtab
 autocmd! FileType python,php,clojure,java nnoremap <buffer> <S-k> :Dash <cword><CR>
