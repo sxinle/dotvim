@@ -196,33 +196,10 @@ Plugin 'Rykka/colorv.vim' "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
 "}}}
-Plugin 'kien/rainbow_parentheses.vim' "{{{
-let g:rbpt_colorpairs = [
-            \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
-            \ ['darkgray',    'DarkOrchid3'],
-            \ ['darkgreen',   'firebrick3'],
-            \ ['darkcyan',    'RoyalBlue3'],
-            \ ['darkred',     'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['brown',       'firebrick3'],
-            \ ['gray',        'RoyalBlue3'],
-            \ ['black',       'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
-            \ ['darkgreen',   'RoyalBlue3'],
-            \ ['darkcyan',    'SeaGreen3'],
-            \ ['darkred',     'DarkOrchid3'],
-            \ ['red',         'firebrick3'],
-            \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-nnoremap <silent> <A-o> :call ToggleRainbow()<CR>
-nnoremap <silent> ø :call ToggleRainbow()<CR>
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+Plugin 'luochen1990/rainbow' "{{{
+let g:rainbow_active = 1
+nnoremap <silent> <A-o> :call rainbow#toggle()<CR>
+nnoremap <silent> ø :exec rainbow#toggle()<CR>
 "}}}
 Plugin 'zhaocai/GoldenView.Vim' "{{{
 let g:goldenview__enable_at_startup = 0
@@ -915,16 +892,6 @@ endfunction
 "}}}
 
 " plugin toggles" {{{
-" rainbow parentheses" {{{
-function! ToggleRainbow()
-    exe 'RainbowParenthesesToggle'
-    exe 'RainbowParenthesesLoadRound'
-    exe 'RainbowParenthesesLoadSquare'
-    exe 'RainbowParenthesesLoadBraces'
-    exe 'RainbowParenthesesLoadChevrons'
-endfunction
-"}}}
-
 " location list" {{{
 function! ToggleLoc()
     if(exists("g:lopen"))
@@ -934,7 +901,6 @@ function! ToggleLoc()
     endif
 endfunction
 "}}}
-
 " ycm auto trigger" {{{
 function! ToggleYcm()
     let a:is_on = g:ycm_auto_trigger

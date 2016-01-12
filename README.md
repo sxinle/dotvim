@@ -131,8 +131,10 @@
 	* 变量标记"mark"
 *  [32.jlanzarotta/bufexplorer](https://github.com/jlanzarotta/bufexplorer)
 	* 缓冲区列表管理
-*  [33.kien/rainbow_parentheses.vim](https://github.com/kien/rainbow_parentheses.vim)
-	* 彩虹括号
+*  ~~[kien/rainbow_parentheses.vim](https://github.com/kien/rainbow_parentheses.vim)~~
+	* ~~彩虹括号~~
+*  [33.luochen1990/rainbow](https://github.com/luochen1990/rainbow)
+	* 彩虹括号improved...
 *  [34.Rykka/colorv.vim](https://github.com/Rykka/colorv.vim)
 	* 颜色预览、编辑
 *  [35.flazz/vim-colorschemes](https://github.com/flazz/vim-colorschemes)
