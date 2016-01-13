@@ -64,15 +64,15 @@
 *	:star: [bling](https://github.com/bling/dotvim/commits/master)
 *	:star: [spf13](https://github.com/spf13/spf13-vim/commits/3.0)
 *	:star: [k-vim](https://github.com/wklken/k-vim)
-*  ~~~[VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)~~~
-	* ~~~插件管理(改用Plug)~~~
+*  ~~[VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)~~
+	* ~~插件管理(改用Plug)~~
 *  [1.junegunn/vim-plug](https://github.com/junegunn/vim-plug)
 	* 插件管理
 *  [2.bling/vim-airline](https://github.com/bling/vim-airline)
 	* 增强状态栏
 *  [3.Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 	* clang语义补全
-	* ~~~[oblitum/YouCompleteMe](https://github.com/oblitum/YouCompleteMe) -- support for parameter completion --~~~
+	* ~~[oblitum/YouCompleteMe](https://github.com/oblitum/YouCompleteMe) -- support for parameter completion --~~
 *  [4.Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)
 	* 高亮成对html标签
 *  [5.scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
