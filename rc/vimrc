@@ -10,12 +10,13 @@ source ~/.vim/dotvim/plug.vim
 call plug#begin('~/.vim/plugged')
 
 "Plug 'VundleVim/Vundle.vim'
-Plug 'sxinle/vim-log-syntax'
+Plug 'sxinle/vim-log-syntax', {'for': 'log'}
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'chrisbra/NrrwRgn'
 Plug 'junegunn/vim-easy-align'
@@ -52,7 +53,6 @@ let g:NERDTreeShowBookmarks=1
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
 "}}}
-Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim' "{{{
 let g:ctrlp_extensions = ['funky', 'mixed']
 let g:ctrlp_funky_syntax_highlight = 1
@@ -68,7 +68,6 @@ elseif executable('file')
     let g:ctrlp_user_command = 'find %s -type f'
 endif
 "}}}
-"Plug 'majutsushi/tagbar'
 Plug 'vladh/tagbar' "{{{ clojure support
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
@@ -135,8 +134,10 @@ nmap <silent> # <Plug>(anzu-sharp-with-echo)zz
 nmap <silent> n <Plug>(anzu-n-with-echo)zz
 nmap <silent> N <Plug>(anzu-N-with-echo)zz
 "}}}
-Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/MatchTagAlways' "{{{
+let g:mta_filetypes = {'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'aspvbs' : 1, 'jsp' : 1 }
+"}}}
 "Plug 'oblitum/YouCompleteMe' "{{{
 let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
 let g:EclimCompletionMethod = 'omnifunc'
@@ -144,7 +145,7 @@ let g:ycm_always_populate_location_list=1
 let g:ycm_key_invoke_completion = '<C-L>'
 let g:ycm_complete_in_comments = 1
 "}}}
-Plug 'SirVer/ultisnips' "{{{
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' "{{{
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -152,29 +153,19 @@ inoremap <c-x><c-k> <c-x><c-k>
 set runtimepath+=~/.vim/dotvim
 let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
 "}}}
-Plug 'Spaceghost/vim-matchit'
-Plug 'mattn/emmet-vim'
-Plug 'Valloric/MatchTagAlways' "{{{
-let g:mta_filetypes = {
-            \ 'html' : 1,
-            \ 'xhtml' : 1,
-            \ 'xml' : 1,
-            \ 'jinja' : 1,
-            \ 'aspvbs' : 1,
-            \ 'jsp' : 1,
-            \}
-"}}}
-Plug 'tpope/vim-fireplace'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'leshill/vim-json'
-Plug 'marijnh/tern_for_vim' "{{{
+Plug 'Spaceghost/vim-matchit', {'for': ['jsp', 'html', 'xml']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'jsp']}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json']}
+Plug 'leshill/vim-json', {'for': 'json'}
+Plug 'marijnh/tern_for_vim', {'for': 'javascript'} "{{{
 let tern_show_signature_in_pum = 1
 "}}}
-Plug 'wookiehangover/jshint.vim' "{{{
+Plug 'wookiehangover/jshint.vim', {'for': 'javascript'} "{{{
 let JSHintUpdateWriteOnly=1
 "}}}
-Plug 'klen/python-mode' "{{{
+Plug 'klen/python-mode',{'for': 'python'} "{{{
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
@@ -186,7 +177,6 @@ Plug 'mbbill/undotree'
 Plug 'kshenoy/vim-signature'
 Plug 'terryma/vim-expand-region'
 Plug 'jlanzarotta/bufexplorer'
-"Plug 'vim-scripts/ScrollColors'
 Plug 'Rykka/colorv.vim' "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
@@ -211,7 +201,7 @@ let g:EasyGrepWindow=1
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
 Plug 'rizzatti/dash.vim'
-Plug 'stephpy/vim-php-cs-fixer' "{{{
+Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'} "{{{
 " If php-cs-fixer is in $PATH, you don't need to define line below
 let g:php_cs_fixer_path = "/usr/local/homebrew/Cellar/php-cs-fixer/1.10/libexec/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "symfony"              " which level ?
