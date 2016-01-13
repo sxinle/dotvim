@@ -2,7 +2,11 @@ source ~/.vim/dotvim/rc/vimrc
 
 try
     if (has('gui_running'))
-        call SwitchTheme(0)
+        if(has('gui_macvim'))
+            call SwitchTheme(0)
+        else
+            call SwitchTheme(26)
+        endif
     else
         "colo wombat256
         highlight CursorLine cterm=NONE ctermbg=NONE

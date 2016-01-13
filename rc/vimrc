@@ -781,7 +781,7 @@ endfunction
 "}}}
 
 " Switch AirlineTheme"{{{
-let g:themes = [[0,'solarized','solarized'], [1,'molokai','molokai'], [2,'badwolf','badwolf'], [3,'bubblegum','bubblegum'], [4,'hybrid','hybrid'], [5,'kolor','kolor'], [6,'lucius','lucius'], [7,'luna','luna'], [8,'understated','understated'], [9,'wombat','wombat'], [10,'zenburn','zenburn'], [11,'base16','base16-atelierdune'], [12,'custom','solarized'], [13,'dark','darkZ'], [14,'jellybeans','jellybeans'], [15,'kalisi','kalisi'], [16,'laederon','solarized'], [17,'light','lightcolors'], [18,'monochrome','solarized'], [19,'murmur','solarized'], [20,'powerlineish','solarized'], [21,'serene','solarized'], [22,'simple','simple_b'], [23,'sol','sol'], [24,'tomorrow','solarized'], [25,'ubaryd','solarized']]
+let g:themes = [[0,'solarized','solarized'], [1,'molokai','molokai'], [2,'badwolf','badwolf'], [3,'bubblegum','bubblegum'], [4,'hybrid','hybrid'], [5,'kolor','kolor'], [6,'lucius','lucius'], [7,'luna','luna'], [8,'understated','understated'], [9,'wombat','wombat'], [10,'zenburn','zenburn'], [11,'base16','base16-atelierdune'], [12,'custom','solarized'], [13,'dark','darkZ'], [14,'jellybeans','jellybeans'], [15,'kalisi','kalisi'], [16,'laederon','solarized'], [17,'light','lightcolors'], [18,'monochrome','solarized'], [19,'murmur','solarized'], [20,'powerlineish','solarized'], [21,'serene','solarized'], [22,'simple','simple_b'], [23,'sol','sol'], [24,'tomorrow','solarized'], [25,'ubaryd','solarized'], [26,'custom','blackboard']]
 function! SwitchTheme(...)
     let l:idx = a:0 > 0 ? a:1 : -1
     let l:max = len(g:themes) - 1
