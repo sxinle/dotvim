@@ -13,11 +13,10 @@
 ----------------
     rm -rf ~/.vim
 
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
     git clone https://github.com/sxinle/dotvim ~/.vim/dotvim
 
     rm -f ~/.vimrc && ln -s ~/.vim/dotvim/rc/rc.local ~/.vimrc
+
 2. 给系统字体打补丁([ fancy ](https://github.com/gabrielelana/awesome-terminal-fonts) 字符)
 ----------------------------------------------------------------------------------------------
 	rm -rf ~/.fonts/Droid+Sans+Mono+Awesome*
@@ -26,17 +25,17 @@
 
 	cd ~/.vim/dotvim/awesomefonts && sh ./droid.sh
 
-3. 使用[ Vundle ](https://github.com/VundleVim/Vundle.vim)安装vim插件
+3. 使用[ Plug ](https://github.com/junegunn/vim-plug)安装vim插件
 ---------------------------------------------------------------------
 
-    vim +PluginInstall! +qall
+    vim +PlugInstall! +qall
 
     ~/.vim/dotvim/init.sh
 
 4. 安装[ YCM ](https://github.com/Valloric/YouCompleteMe)语义补全
 ----------------------------------------------------------------------
 
-    cd ~/.vim/bundle/YouCompleteMe
+    cd ~/.vim/plugged/YouCompleteMe
 
     ./install.sh --clang-completer
 
@@ -65,13 +64,15 @@
 *	:star: [bling](https://github.com/bling/dotvim/commits/master)
 *	:star: [spf13](https://github.com/spf13/spf13-vim/commits/3.0)
 *	:star: [k-vim](https://github.com/wklken/k-vim)
-*  [1.VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)
+*  ~~~[VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)~~~
+	* ~~~插件管理(改用Plug)~~~
+*  [1.junegunn/vim-plug](https://github.com/junegunn/vim-plug)
 	* 插件管理
 *  [2.bling/vim-airline](https://github.com/bling/vim-airline)
 	* 增强状态栏
 *  [3.Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 	* clang语义补全
-	* [oblitum/YouCompleteMe](https://github.com/oblitum/YouCompleteMe) -- support for parameter completion --
+	* ~~~[oblitum/YouCompleteMe](https://github.com/oblitum/YouCompleteMe) -- support for parameter completion --~~~
 *  [4.Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)
 	* 高亮成对html标签
 *  [5.scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
