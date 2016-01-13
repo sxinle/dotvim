@@ -7,10 +7,10 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 " [Plug] "{{{
 
 filetype off                   " *required!
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'sxinle/vim-log-syntax'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'jiangmiao/auto-pairs'
@@ -371,8 +371,10 @@ endif
 if has('gui_running')
     if has('win32')
         au GUIEnter * simalt ~x
+    elseif(has('gui_macvim'))
+        set lines=999 columns=999
     else
-        set lines=58 columns=280
+        au GUIEnter * call system("wmctrl -ir " . v:windowid . " -b add,maximized_vert,maximized_horz")
     endif
 endif
 
@@ -533,7 +535,7 @@ nnoremap <silent> <leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <silent> <leader>cg :!g++ -g *.cpp<CR>
 nnoremap <silent> <leader>cs :COLORSCROLL<CR>
 nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<CR>
-nnoremap <silent> <leader>dq :exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:q!<CR>
+nnoremap <silent> <leader>dq :silent exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:silent q!<CR>
 nnoremap <silent> <leader>D  :1,100 bwipeout<CR>
 nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
 nnoremap <leader>E  :call URLEncoder("","de","u8")<left><left>

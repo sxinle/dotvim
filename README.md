@@ -13,7 +13,7 @@
 ----------------
     rm -rf ~/.vim
 
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
     git clone https://github.com/sxinle/dotvim ~/.vim/dotvim
 
@@ -26,7 +26,7 @@
 
 	cd ~/.vim/dotvim/awesomefonts && sh ./droid.sh
 
-3. 使用[ Vundle ](https://github.com/gmarik/Vundle.vim)安装vim插件
+3. 使用[ Vundle ](https://github.com/VundleVim/Vundle.vim)安装vim插件
 ---------------------------------------------------------------------
 
     vim +PluginInstall! +qall
@@ -65,7 +65,7 @@
 *	:star: [bling](https://github.com/bling/dotvim/commits/master)
 *	:star: [spf13](https://github.com/spf13/spf13-vim/commits/3.0)
 *	:star: [k-vim](https://github.com/wklken/k-vim)
-*  [1.gmarik/vundle](https://github.com/gmarik/vundle)
+*  [1.VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)
 	* 插件管理
 *  [2.bling/vim-airline](https://github.com/bling/vim-airline)
 	* 增强状态栏
