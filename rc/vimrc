@@ -39,7 +39,7 @@ let g:airline_theme='custom'
 "let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
-Plug 'kien/ctrlp.vim', {'on' : 'CtrlP'} | Plug 'tacahiroy/ctrlp-funky', {'on' : 'CtrlP'} "{{{
+Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
 let g:ctrlp_extensions = ['funky', 'mixed']
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_cmd = 'CtrlPFunky'
@@ -173,7 +173,7 @@ Plug 'nathanaelkane/vim-indent-guides', {'on' : 'IndentGuidesToggle'} "{{{
 let g:indent_guides_guide_size = 1
 "}}}
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
-Plug 'jlanzarotta/bufexplorer', {'on' : 'BufExplorerVerticalSplit'}
+Plug 'jlanzarotta/bufexplorer'
 Plug 'Rykka/colorv.vim', {'on' : 'ColorV'} "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
