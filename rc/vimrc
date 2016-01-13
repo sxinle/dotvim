@@ -9,19 +9,15 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 source ~/.vim/dotvim/plug.vim
 call plug#begin('~/.vim/plugged')
 
-"Plug 'VundleVim/Vundle.vim'
-Plug 'sxinle/vim-log-syntax', {'for': 'log'}
+Plug 'Valloric/YouCompleteMe'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'chrisbra/NrrwRgn'
-Plug 'junegunn/vim-easy-align'
-Plug 'godlygeek/tabular'
 Plug 'osyo-manga/vim-over'
+Plug 'kshenoy/vim-signature'
+Plug 'terryma/vim-expand-region'
+Plug 'junegunn/vim-easy-align'
 Plug 'bling/vim-airline' "{{{
 if (has('gui_macvim'))
     set guifont=Monaco\ for\ Powerline:h12
@@ -43,17 +39,7 @@ let g:airline_theme='custom'
 "let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
-"Plug 'justinmk/vim-sneak' "{{{
-"let g:sneak#streak = 1
-"let g:sneak#s_next = 1
-""}}}
-Plug 'scrooloose/nerdtree' "{{{
-let g:NERDTreeQuitOnOpen=0
-let g:NERDTreeShowBookmarks=1
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
-"}}}
-Plug 'kien/ctrlp.vim' "{{{
+Plug 'kien/ctrlp.vim', {'on' : 'CtrlP'} | Plug 'tacahiroy/ctrlp-funky', {'on' : 'CtrlP'} "{{{
 let g:ctrlp_extensions = ['funky', 'mixed']
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_cmd = 'CtrlPFunky'
@@ -68,6 +54,20 @@ elseif executable('file')
     let g:ctrlp_user_command = 'find %s -type f'
 endif
 "}}}
+Plug 'scrooloose/nerdtree' "{{{
+let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
+"}}}
+Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+Plug 'chrisbra/NrrwRgn', {'on' : '<Plug>NrrwrgnDo'}
+Plug 'godlygeek/tabular', {'on': 'Tabularize'}
+Plug 'sxinle/vim-log-syntax', {'for': 'log'}
+"Plug 'justinmk/vim-sneak' "{{{
+"let g:sneak#streak = 1
+"let g:sneak#s_next = 1
+""}}}
 Plug 'vladh/tagbar' "{{{ clojure support
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
@@ -134,7 +134,6 @@ nmap <silent> # <Plug>(anzu-sharp-with-echo)zz
 nmap <silent> n <Plug>(anzu-n-with-echo)zz
 nmap <silent> N <Plug>(anzu-N-with-echo)zz
 "}}}
-Plug 'Valloric/YouCompleteMe'
 Plug 'Valloric/MatchTagAlways' "{{{
 let g:mta_filetypes = {'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'aspvbs' : 1, 'jsp' : 1 }
 "}}}
@@ -154,11 +153,11 @@ set runtimepath+=~/.vim/dotvim
 let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
 "}}}
 Plug 'Spaceghost/vim-matchit', {'for': ['jsp', 'html', 'xml']}
-Plug 'mattn/emmet-vim', {'for': ['html', 'jsp']}
+Plug 'mattn/emmet-vim', {'for': ['html','jsp']}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json']}
 Plug 'leshill/vim-json', {'for': 'json'}
+Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json']}
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'} "{{{
 let tern_show_signature_in_pum = 1
 "}}}
@@ -170,14 +169,12 @@ let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 "}}}
-Plug 'nathanaelkane/vim-indent-guides' "{{{
+Plug 'nathanaelkane/vim-indent-guides', {'on' : 'IndentGuidesToggle'} "{{{
 let g:indent_guides_guide_size = 1
 "}}}
-Plug 'mbbill/undotree'
-Plug 'kshenoy/vim-signature'
-Plug 'terryma/vim-expand-region'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'Rykka/colorv.vim' "{{{
+Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
+Plug 'jlanzarotta/bufexplorer', {'on' : 'BufExplorerVerticalSplit'}
+Plug 'Rykka/colorv.vim', {'on' : 'ColorV'} "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
 "}}}
@@ -186,7 +183,7 @@ let g:rainbow_active = 1
 nnoremap <silent> <A-o> :call rainbow#toggle()<CR>
 nnoremap <silent> ø :exec rainbow#toggle()<CR>
 "}}}
-Plug 'zhaocai/GoldenView.Vim' "{{{
+Plug 'zhaocai/GoldenView.Vim', {'on' : '<Plug>ToggleGoldenViewAutoResize'} "{{{
 let g:goldenview__enable_at_startup = 0
 let g:goldenview__enable_default_mapping=0
 "}}}
@@ -195,12 +192,12 @@ let g:goldenview__enable_default_mapping=0
 "let g:yankring_replace_n_nkey=''
 "let g:yankring_history_dir=g:dotvim_settings.local_path . 'yankring'
 ""}}}
-Plug 'dkprice/vim-easygrep' "{{{
+Plug 'dkprice/vim-easygrep', {'on' : 'Grep'} "{{{
 let g:EasyGrepWindow=1
 "let g:EasyGrepCommand = 1   " use external grep has no result
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
-Plug 'rizzatti/dash.vim'
+Plug 'rizzatti/dash.vim', {'on' : 'Dash'}
 Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'} "{{{
 " If php-cs-fixer is in $PATH, you don't need to define line below
 let g:php_cs_fixer_path = "/usr/local/homebrew/Cellar/php-cs-fixer/1.10/libexec/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
