@@ -6,23 +6,22 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 
 " [Plug] "{{{
 
-filetype off                   " *required!
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+source ~/.vim/dotvim/plug.vim
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'sxinle/vim-log-syntax'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-repeat'
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'godlygeek/tabular'
-Plugin 'osyo-manga/vim-over'
-Plugin 'bling/vim-airline' "{{{
+"Plug 'VundleVim/Vundle.vim'
+Plug 'sxinle/vim-log-syntax'
+Plug 'flazz/vim-colorschemes'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-repeat'
+Plug 'chrisbra/NrrwRgn'
+Plug 'junegunn/vim-easy-align'
+Plug 'godlygeek/tabular'
+Plug 'osyo-manga/vim-over'
+Plug 'bling/vim-airline' "{{{
 if (has('gui_macvim'))
     set guifont=Monaco\ for\ Powerline:h12
 else
@@ -37,28 +36,24 @@ let g:airline#extensions#tabline#tab_nr_type = 1        " tab number
 let g:airline#extensions#tabline#buffer_nr_show = 0     " tabline显示编号
 let g:airline#extensions#tagbar#enabled = 0             " 不显示tagbar
 let g:airline#extensions#whitespace#enabled = 0         " warning_section show whitespace
-call airline#parts#define_accent('file', 'orange')      " 可以改变section的字体颜色
-let g:airline_section_b = airline#section#create(['%b-0x%B ', '%{getcwd()}'])
+"call airline#parts#define_accent('file', 'orange')      " 可以改变section的字体颜色
+"let g:airline_section_b = airline#section#create(['%b-0x%B ', '%{getcwd()}'])
 let g:airline_theme='custom'
 "let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
-"Plugin 'justinmk/vim-sneak' "{{{
+"Plug 'justinmk/vim-sneak' "{{{
 "let g:sneak#streak = 1
 "let g:sneak#s_next = 1
 ""}}}
-Plugin 'scrooloose/nerdtree' "{{{
+Plug 'scrooloose/nerdtree' "{{{
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowBookmarks=1
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
 "}}}
-Plugin 'tpope/vim-surround' "{{{
-" ASP debug
-let g:surround_{char2nr("-")} = "'<--------DEBUG Begin!-------->\non error resume next \r \nif err<>0 then \nresponse.write err.Description \nresponse.end \nend if\n'<---------DEBUG End!--------->"
-let g:surround_{char2nr("=")} = "response.write \"<script language='javascript'>\"\nresponse.write \"alert('\r');\"\nresponse.write \"</script>\"\nresponse.end"
-"}}}
-Plugin 'kien/ctrlp.vim' "{{{
+Plug 'tpope/vim-surround'
+Plug 'kien/ctrlp.vim' "{{{
 let g:ctrlp_extensions = ['funky', 'mixed']
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_cmd = 'CtrlPFunky'
@@ -73,13 +68,13 @@ elseif executable('file')
     let g:ctrlp_user_command = 'find %s -type f'
 endif
 "}}}
-"Plugin 'majutsushi/tagbar'
-Plugin 'vladh/tagbar' "{{{ clojure support
+"Plug 'majutsushi/tagbar'
+Plug 'vladh/tagbar' "{{{ clojure support
 let g:tagbar_width = 28
 let g:tagbar_autofocus = 1
 "let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
 "}}}
-Plugin 'mhinz/vim-startify' "{{{
+Plug 'mhinz/vim-startify' "{{{
 autocmd VimEnter *
             \ if !argc() |
             \   Startify |
@@ -128,7 +123,7 @@ hi StartifySpecial ctermfg=240
 hi StartifyHeader  ctermfg=114
 hi StartifyFooter  ctermfg=240
 hi StartifyFile    ctermfg=111"}}}
-Plugin 'osyo-manga/vim-anzu' "{{{
+Plug 'osyo-manga/vim-anzu' "{{{
 "nnoremap <silent> n nzz
 "nnoremap <silent> N Nzz
 "nnoremap <silent> * *zz
@@ -140,16 +135,16 @@ nmap <silent> # <Plug>(anzu-sharp-with-echo)zz
 nmap <silent> n <Plug>(anzu-n-with-echo)zz
 nmap <silent> N <Plug>(anzu-N-with-echo)zz
 "}}}
-Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
-"Plugin 'oblitum/YouCompleteMe' "{{{
+Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe'
+"Plug 'oblitum/YouCompleteMe' "{{{
 let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_always_populate_location_list=1
 let g:ycm_key_invoke_completion = '<C-L>'
 let g:ycm_complete_in_comments = 1
 "}}}
-Plugin 'SirVer/ultisnips' "{{{
+Plug 'SirVer/ultisnips' "{{{
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -157,9 +152,9 @@ inoremap <c-x><c-k> <c-x><c-k>
 set runtimepath+=~/.vim/dotvim
 let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
 "}}}
-Plugin 'Spaceghost/vim-matchit'
-Plugin 'mattn/emmet-vim'
-Plugin 'Valloric/MatchTagAlways' "{{{
+Plug 'Spaceghost/vim-matchit'
+Plug 'mattn/emmet-vim'
+Plug 'Valloric/MatchTagAlways' "{{{
 let g:mta_filetypes = {
             \ 'html' : 1,
             \ 'xhtml' : 1,
@@ -169,54 +164,54 @@ let g:mta_filetypes = {
             \ 'jsp' : 1,
             \}
 "}}}
-Plugin 'tpope/vim-fireplace'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'leshill/vim-json'
-Plugin 'marijnh/tern_for_vim' "{{{
+Plug 'tpope/vim-fireplace'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'leshill/vim-json'
+Plug 'marijnh/tern_for_vim' "{{{
 let tern_show_signature_in_pum = 1
 "}}}
-Plugin 'wookiehangover/jshint.vim' "{{{
+Plug 'wookiehangover/jshint.vim' "{{{
 let JSHintUpdateWriteOnly=1
 "}}}
-Plugin 'klen/python-mode' "{{{
+Plug 'klen/python-mode' "{{{
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 "}}}
-Plugin 'nathanaelkane/vim-indent-guides' "{{{
+Plug 'nathanaelkane/vim-indent-guides' "{{{
 let g:indent_guides_guide_size = 1
 "}}}
-Plugin 'mbbill/undotree'
-Plugin 'kshenoy/vim-signature'
-Plugin 'terryma/vim-expand-region'
-Plugin 'jlanzarotta/bufexplorer'
-"Plugin 'vim-scripts/ScrollColors'
-Plugin 'Rykka/colorv.vim' "{{{
+Plug 'mbbill/undotree'
+Plug 'kshenoy/vim-signature'
+Plug 'terryma/vim-expand-region'
+Plug 'jlanzarotta/bufexplorer'
+"Plug 'vim-scripts/ScrollColors'
+Plug 'Rykka/colorv.vim' "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
 "}}}
-Plugin 'luochen1990/rainbow' "{{{
+Plug 'luochen1990/rainbow' "{{{
 let g:rainbow_active = 1
 nnoremap <silent> <A-o> :call rainbow#toggle()<CR>
 nnoremap <silent> ø :exec rainbow#toggle()<CR>
 "}}}
-Plugin 'zhaocai/GoldenView.Vim' "{{{
+Plug 'zhaocai/GoldenView.Vim' "{{{
 let g:goldenview__enable_at_startup = 0
 let g:goldenview__enable_default_mapping=0
 "}}}
-"Plugin 'vim-scripts/YankRing.vim' "{{{
+"Plug 'vim-scripts/YankRing.vim' "{{{
 "let g:yankring_replace_n_pkey=''
 "let g:yankring_replace_n_nkey=''
 "let g:yankring_history_dir=g:dotvim_settings.local_path . 'yankring'
 ""}}}
-Plugin 'dkprice/vim-easygrep' "{{{
+Plug 'dkprice/vim-easygrep' "{{{
 let g:EasyGrepWindow=1
 "let g:EasyGrepCommand = 1   " use external grep has no result
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
-Plugin 'rizzatti/dash.vim'
-Plugin 'stephpy/vim-php-cs-fixer' "{{{
+Plug 'rizzatti/dash.vim'
+Plug 'stephpy/vim-php-cs-fixer' "{{{
 " If php-cs-fixer is in $PATH, you don't need to define line below
 let g:php_cs_fixer_path = "/usr/local/homebrew/Cellar/php-cs-fixer/1.10/libexec/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "symfony"              " which level ?
@@ -229,7 +224,8 @@ let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run op
 let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information."
 "}}}
 
-filetype plugin indent on     " *required!
+call plug#end()
+
 "}}}
 
 " [Conf] "{{{
@@ -240,7 +236,6 @@ filetype plugin indent on     " *required!
 let mapleader=","
 let g:mapleader=","
 
-set nocp                            " 关闭Vi兼容模式
 set magic                           " 正则搜索 turn magic on
 set hidden                          " Allow buffer switching without saving
 set confirm                         " 在处理未保存或只读文件的时候，弹出确认
