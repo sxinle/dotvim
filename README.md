@@ -41,9 +41,7 @@
 
 ### Resources
 
-0. [vim资源汇总](http://u.memect.com/vim/)
-
-1. [VimAwesome](http://vimawesome.com/)
+0. [VimAwesome](http://vimawesome.com/)
 
 1. [Google+](https://plus.google.com/communities/105049811056605918816)
 
@@ -55,9 +53,7 @@
 
 5. [openvim tutorial](http://www.openvim.com/tutorial.html)
 
-6. [vim genius](http://www.vimgenius.com/)
-
-7. [vim colors](http://vimcolors.com/)
+6. [vim colors](http://vimcolors.com/)
 
 插件列表 <a name="plugin"/>[:shoe:](#top)
 -----------
