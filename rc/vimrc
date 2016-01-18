@@ -165,7 +165,7 @@ Plug 'mattn/emmet-vim', {'for': ['html','jsp']}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'leshill/vim-json', {'for': 'json'}
-Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json']}
+Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json', 'html']}
 Plug 'marijnh/tern_for_vim', {'for': 'javascript'} "{{{
 let tern_show_signature_in_pum = 1
 "}}}
