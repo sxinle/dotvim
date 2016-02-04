@@ -47,6 +47,7 @@ let g:airline_theme='custom'
 "let g:airline_section_b=airline#section#create(['%{printf("%s","\uf007")}'])
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
 let g:ctrlp_extensions = ['funky', 'mixed']
 let g:ctrlp_funky_syntax_highlight = 1
