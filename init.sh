@@ -25,5 +25,3 @@ ln -sf ~/.vim/dotvim/util/tern-project ~/.tern-project
 echo "==============================[ Init Complete ]==================================="
 tree $VIM_LOCAL_PATH
 
-#????
-# OVER
