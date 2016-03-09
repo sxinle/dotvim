@@ -5,7 +5,8 @@ try
         if(has('gui_macvim'))
             call SwitchTheme(0)
         else
-            call SwitchTheme(26)
+            "call SwitchTheme(26)
+            call SwitchTheme(0)
         endif
     else
         "colo wombat256
