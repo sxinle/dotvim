@@ -449,6 +449,7 @@ nnoremap <silent> <A-l> :bnex<CR>
 nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
+nnoremap <silent> <A-o> :CtrlPCurWD<CR>
 
 "for mac - -!"{{{
 nnoremap <silent> ƒ :call PreviewFold()<CR>
