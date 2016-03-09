@@ -67,7 +67,7 @@ Plug 'scrooloose/nerdtree' "{{{
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowBookmarks=1
 let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeBookmarksFile = $HOME . '.vim/.vlocal/NERDTreeBookMarks'
+let g:NERDTreeBookmarksFile = $HOME . '/.vim/.vlocal/NERDTreeBookMarks'
 "}}}
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'chrisbra/NrrwRgn', {'on' : '<Plug>NrrwrgnDo'}
