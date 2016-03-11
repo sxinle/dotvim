@@ -784,6 +784,8 @@ function! Run()
         :!php -l %
     elseif (ft == 'lisp')
         :!clisp %
+    elseif (ft == 'ruby')
+        :!ruby %
     endif
 endfunction
 "}}}
