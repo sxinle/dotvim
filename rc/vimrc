@@ -450,6 +450,7 @@ nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
 nnoremap <silent> <A-o> :CtrlPMRUFiles<CR>
+nnoremap <silent> <A-1> :NERDTreeFocus<CR>
 nnoremap <silent> <A-w> :bw<CR>
 
 "for mac - -!"{{{
@@ -471,11 +472,11 @@ nnoremap <silent> <leader><Space> :noh<CR>:call anzu#clear_search_status()<CR>
 vmap <Enter> <Plug>(LiveEasyAlign)
 
 "map <leader>we :e %% map <leader>se :sp %% map <leader>ve :vsp %% map <leader>te :tabe %%四个映射
-for i in range(1, 9)
-    exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
-    exec 'nnoremap <silent> <D-' . i . '> '. i .'gt'
-    exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
-endfor
+"for i in range(1, 9)
+    "exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
+    "exec 'nnoremap <silent> <D-' . i . '> '. i .'gt'
+    "exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
+"endfor
 
 nnoremap <silent> <A--> :call ZoomFont(0)<CR>
 nnoremap <silent> <A-=> :call ZoomFont(1)<CR>
