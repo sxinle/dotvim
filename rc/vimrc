@@ -449,7 +449,7 @@ nnoremap <silent> <A-l> :bnex<CR>
 nnoremap <silent> <A-.> :lne<CR>
 nnoremap <silent> <A-,> :lp<CR>
 nnoremap <silent> <A-i> :call SwitchBackGround()<CR>
-nnoremap <silent> <A-o> :CtrlPCurWD<CR>
+nnoremap <silent> <A-o> :CtrlPMRUFiles<CR>
 nnoremap <silent> <A-w> :bw<CR>
 
 "for mac - -!"{{{
