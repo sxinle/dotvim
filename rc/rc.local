@@ -20,4 +20,3 @@ endtry
 if(has('gui_macvim'))
     set transparency = 100
 endif
-

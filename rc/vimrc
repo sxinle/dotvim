@@ -787,6 +787,8 @@ function! Run()
         :!clisp %
     elseif (ft == 'ruby')
         :!ruby %
+    elseif (ft == 'curl')
+        :!bash %|more
     endif
 endfunction
 "}}}
