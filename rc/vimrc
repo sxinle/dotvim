@@ -530,7 +530,7 @@ nnoremap <silent> <leader>cg :!g++ -g *.cpp<CR>
 nnoremap <silent> <leader>cs :COLORSCROLL<CR>
 nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<CR>
 nnoremap <silent> <leader>dq :silent exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:silent q!<CR>
-nnoremap <silent> <leader>D  :1,100 bwipeout<CR>
+nnoremap <silent> <leader>D  :%bwipeout<CR>
 nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
 nnoremap <leader>E  :call URLEncoder("","de","u8")<left><left>
 vnoremap <silent> <leader>fm :call SourceCodeFormat('v')<CR>
