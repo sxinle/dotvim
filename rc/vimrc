@@ -473,9 +473,9 @@ vmap <Enter> <Plug>(LiveEasyAlign)
 
 "map <leader>we :e %% map <leader>se :sp %% map <leader>ve :vsp %% map <leader>te :tabe %%四个映射
 "for i in range(1, 9)
-    "exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
-    "exec 'nnoremap <silent> <D-' . i . '> '. i .'gt'
-    "exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
+"exec 'nnoremap <silent> <A-' . i . '> '. i .'gt'
+"exec 'nnoremap <silent> <D-' . i . '> '. i .'gt'
+"exec 'nnoremap <silent> <leader>' . i . ' ' . i .'gt'   |" 解决 terminal Alt 按键绑定冲突
 "endfor
 
 nnoremap <silent> <A--> :call ZoomFont(0)<CR>
@@ -532,7 +532,7 @@ nnoremap <silent> <leader>dt :!find . -maxdepth 1 -name tags -exec rm {} -ir \;<
 nnoremap <silent> <leader>dq :silent exe "!rm -f " . g:dotvim_settings.local_path . "{undodir,session,yankring}/*"<CR>:set viminfo-=%<CR>:silent q!<CR>
 nnoremap <silent> <leader>D  :%bwipeout<CR>
 nnoremap <silent> <leader>e  :NERDTreeToggle<CR>
-nnoremap <leader>E  :call URLEncoder("","de","u8")<left><left>
+nnoremap <leader>E  :call URLEncoder()<CR>
 vnoremap <silent> <leader>fm :call SourceCodeFormat('v')<CR>
 nnoremap <silent> <leader>fm :call SourceCodeFormat('n')<CR>
 nnoremap <silent> <leader>fs :setlocal foldmethod=syntax<CR>
@@ -1025,22 +1025,31 @@ autocmd FileType clojure call TurnOnClojureFolding()
 
 " GBK encode/decode "{{{
 function! URLEncoder(...)
-    if (a:2 == '')
-        "gbk URLEncode
-        let word = (a:1 == '') ? expand("<cword>") : a:1
-        let ret = system('python -c "import urllib;str=\"'.word.'\";d ={\"ret\":str.decode(\"utf8\").encode(\"gbk\")};print urllib.urlencode(d,\"gbk\");"')
-        let cmdStr = "normal Go".word."(GBK URLEncode)-->".ret."\<ESC>F=lvEy"
-        exe cmdStr
+    if (@" == '')
+        echo '请先复制需要处理的内容!!!'
     else
-        let word = @"
-        let word = substitute(word, "\n", "", "g")
-        if(a:3 != '')
-            let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str);"')
-        else 
-            let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str).decode(\"gbk\").encode(\"utf8\")"')
+        echo "1) GBK  编码         2) GBK  解码"
+        echo "3) UTF8 编码         4) UTF8 解码"
+        let l:choose = input("选择一种操作: ")
+        if (l:choose >= 1 && l:choose <= 4)
+            "let word = (a:1 == '') ? expand("<cword>") : a:1
+            let word = @"
+            let word = substitute(word, "\n", "", "g")
+
+            if (l:choose == 1)
+                let ret = system('python -c "import urllib;str=\"'.word.'\";d =str.decode(\"utf8\").encode(\"gbk\");print urllib.quote(d,\"gbk\");"')
+            elseif(l:choose == 2)
+                let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str).decode(\"gbk\").encode(\"utf8\")"')
+            elseif(l:choose == 3)
+                let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.quote(str,\"utf8\");"')
+            elseif(l:choose == 4)
+                let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str);"')
+            endif
+            let cmdStr = "normal Go".word."\r\n".ret."\<ESC>0eebvey"
+            exec cmdStr
+        else
+            echo "\n输入错误，(1-4 valid)"
         endif
-        let cmdStr = "normal Go".ret."\<ESC>Vy"
-        exe cmdStr
     endif
 endfunction
 "}}}
