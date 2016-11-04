@@ -1045,7 +1045,7 @@ function! URLEncoder(...)
             elseif(l:choose == 4)
                 let ret = system('python -c "import urllib;str=\"'.word.'\";print urllib.unquote(str);"')
             endif
-            let cmdStr = "normal Go".word."\r\n".ret."\<ESC>0eebvey"
+            let cmdStr = "normal Go".ret."\<ESC>Vy"
             exec cmdStr
         else
             echo "\n输入错误，(1-4 valid)"
