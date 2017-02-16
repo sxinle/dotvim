@@ -23,8 +23,8 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 "}}}
 Plug 'scrooloose/nerdcommenter'
 Plug 'osyo-manga/vim-over'
-Plug 'kshenoy/vim-signature'
-Plug 'terryma/vim-expand-region'
+"Plug 'kshenoy/vim-signature'
+"Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'bling/vim-airline' "{{{
 if (has('gui_macvim'))
@@ -48,21 +48,21 @@ let g:airline_theme='custom'
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
-let g:ctrlp_extensions = ['funky', 'mixed']
-let g:ctrlp_funky_syntax_highlight = 1
-let g:ctrlp_cmd = 'CtrlPFunky'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_regexp = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:40,results:100'
-let g:ctrlp_working_path_mode = 'rw'
-if executable('ag')
-    let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
-elseif executable('file')
-    let g:ctrlp_user_command = 'find %s -type f'
-endif
-"}}}
+"Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
+"let g:ctrlp_extensions = ['funky', 'mixed']
+"let g:ctrlp_funky_syntax_highlight = 1
+"let g:ctrlp_cmd = 'CtrlPFunky'
+"let g:ctrlp_show_hidden = 1
+"let g:ctrlp_regexp = 1
+"let g:ctrlp_clear_cache_on_exit = 0
+"let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:40,results:100'
+"let g:ctrlp_working_path_mode = 'rw'
+"if executable('ag')
+    "let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+"elseif executable('file')
+    "let g:ctrlp_user_command = 'find %s -type f'
+"endif
+""}}}
 Plug 'scrooloose/nerdtree' "{{{
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowBookmarks=1
@@ -77,60 +77,60 @@ Plug 'sxinle/vim-log-syntax', {'for': 'log'}
 "let g:sneak#streak = 1
 "let g:sneak#s_next = 1
 ""}}}
-Plug 'vladh/tagbar' "{{{ clojure support
-let g:tagbar_width = 28
-let g:tagbar_autofocus = 1
-"let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
-"}}}
-Plug 'mhinz/vim-startify' "{{{
-autocmd VimEnter *
-            \ if !argc() |
-            \   Startify |
-            \   NERDTree |
-            \   execute "normal \<c-w>w" |
-            \ endif
-let NERDTreeHijackNetrw = 0
-let g:startify_session_dir = g:dotvim_settings.local_path . 'session'
-let g:startify_files_number        = 8
-let g:startify_session_persistence = 1
-let g:startify_session_autoload    = 1
-let g:startify_enable_special      = 0
-let g:startify_change_to_dir       = 0
+"Plug 'vladh/tagbar' "{{{ clojure support
+"let g:tagbar_width = 28
+"let g:tagbar_autofocus = 1
+""let g:tagbar_ctags_bin='/usr/local/homebrew/bin/ctags'
+""}}}
+"Plug 'mhinz/vim-startify' "{{{
+"autocmd VimEnter *
+            "\ if !argc() |
+            "\   Startify |
+            "\   NERDTree |
+            "\   execute "normal \<c-w>w" |
+            "\ endif
+"let NERDTreeHijackNetrw = 0
+"let g:startify_session_dir = g:dotvim_settings.local_path . 'session'
+"let g:startify_files_number        = 8
+"let g:startify_session_persistence = 1
+"let g:startify_session_autoload    = 1
+"let g:startify_enable_special      = 0
+"let g:startify_change_to_dir       = 0
 
-let g:startify_list_order = [
-            \ ['   LRU:'],
-            \ 'files',
-            \ ['   Sessions:'],
-            \ 'sessions',
-            \ ['   Bookmarks:'],
-            \ 'bookmarks',
-            \ ]
+"let g:startify_list_order = [
+            "\ ['   LRU:'],
+            "\ 'files',
+            "\ ['   Sessions:'],
+            "\ 'sessions',
+            "\ ['   Bookmarks:'],
+            "\ 'bookmarks',
+            "\ ]
 
-let g:startify_skiplist = [
-            \ 'COMMIT_EDITMSG',
-            \ $VIMRUNTIME .'/doc',
-            \ 'bundle/.*/doc',
-            \ '.vimgolf',
-            \ ]
+"let g:startify_skiplist = [
+            "\ 'COMMIT_EDITMSG',
+            "\ $VIMRUNTIME .'/doc',
+            "\ 'bundle/.*/doc',
+            "\ '.vimgolf',
+            "\ ]
 
-let g:startify_bookmarks = [
-            \ '~/.vimrc',
-            \ ]
+"let g:startify_bookmarks = [
+            "\ '~/.vimrc',
+            "\ ]
 
-"let g:startify_custom_footer =
-"\ ['', "   too young, too simple, sometimes naive......", '']
+""let g:startify_custom_footer =
+""\ ['', "   too young, too simple, sometimes naive......", '']
 
-let g:startify_custom_header =
-            \ map(split(system('date +%F%t[%u]%t%T | cowthink -y'), '\n'), '"   ". v:val') + ['']
+"let g:startify_custom_header =
+            "\ map(split(system('date +%F%t[%u]%t%T | cowthink -y'), '\n'), '"   ". v:val') + ['']
 
-hi StartifyBracket ctermfg=240
-hi StartifyNumber  ctermfg=215
-hi StartifyPath    ctermfg=245
-hi StartifySlash   ctermfg=240
-hi StartifySpecial ctermfg=240
-hi StartifyHeader  ctermfg=114
-hi StartifyFooter  ctermfg=240
-hi StartifyFile    ctermfg=111"}}}
+"hi StartifyBracket ctermfg=240
+"hi StartifyNumber  ctermfg=215
+"hi StartifyPath    ctermfg=245
+"hi StartifySlash   ctermfg=240
+"hi StartifySpecial ctermfg=240
+"hi StartifyHeader  ctermfg=114
+"hi StartifyFooter  ctermfg=240
+"hi StartifyFile    ctermfg=111"}}}
 Plug 'osyo-manga/vim-anzu' "{{{
 "nnoremap <silent> n nzz
 "nnoremap <silent> N Nzz
@@ -147,23 +147,23 @@ Plug 'Valloric/MatchTagAlways' "{{{
 let g:mta_filetypes = {'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'aspvbs' : 1, 'jsp' : 1 }
 "}}}
 "Plug 'oblitum/YouCompleteMe' "{{{
-let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
-let g:EclimCompletionMethod = 'omnifunc'
-let g:ycm_always_populate_location_list=1
-let g:ycm_key_invoke_completion = '<C-L>'
-let g:ycm_complete_in_comments = 1
-"}}}
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' "{{{
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-inoremap <c-x><c-k> <c-x><c-k>
-set runtimepath+=~/.vim/dotvim
-let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
-"}}}
+"let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
+"let g:EclimCompletionMethod = 'omnifunc'
+"let g:ycm_always_populate_location_list=1
+"let g:ycm_key_invoke_completion = '<C-L>'
+"let g:ycm_complete_in_comments = 1
+""}}}
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' "{{{
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"inoremap <c-x><c-k> <c-x><c-k>
+"set runtimepath+=~/.vim/dotvim
+"let g:UltiSnipsSnippetsDir="~/.vim/dotvim/UltiSnips"
+""}}}
 Plug 'Spaceghost/vim-matchit', {'for': ['jsp', 'html', 'xml']}
-Plug 'mattn/emmet-vim', {'for': ['html','jsp']}
-Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+"Plug 'mattn/emmet-vim', {'for': ['html','jsp']}
+"Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'leshill/vim-json', {'for': 'json'}
 Plug 'maksimr/vim-jsbeautify', {'for': ['javascript', 'json', 'html']}
@@ -181,18 +181,18 @@ let g:pymode_rope_complete_on_dot = 0
 Plug 'nathanaelkane/vim-indent-guides', {'on' : 'IndentGuidesToggle'} "{{{
 let g:indent_guides_guide_size = 1
 "}}}
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
+"Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
 Plug 'jlanzarotta/bufexplorer'
-Plug 'Rykka/colorv.vim', {'on' : 'ColorV'} "{{{
+"Plug 'Rykka/colorv.vim', {'on' : 'ColorV'} "{{{
 let g:colorv_cache_file = g:dotvim_settings.local_path . 'vim_colorv_cache'
 let g:colorv_cache_fav = g:dotvim_settings.local_path . 'vim_colorv_cache_fav'
 "}}}
-Plug 'luochen1990/rainbow' "{{{
+"Plug 'luochen1990/rainbow' "{{{
 let g:rainbow_active = 1
 nnoremap <silent> <A-o> :call rainbow#toggle()<CR>
 nnoremap <silent> ø :exec rainbow#toggle()<CR>
 "}}}
-Plug 'zhaocai/GoldenView.Vim', {'on' : '<Plug>ToggleGoldenViewAutoResize'} "{{{
+"Plug 'zhaocai/GoldenView.Vim', {'on' : '<Plug>ToggleGoldenViewAutoResize'} "{{{
 let g:goldenview__enable_at_startup = 0
 let g:goldenview__enable_default_mapping=0
 "}}}
@@ -201,13 +201,13 @@ let g:goldenview__enable_default_mapping=0
 "let g:yankring_replace_n_nkey=''
 "let g:yankring_history_dir=g:dotvim_settings.local_path . 'yankring'
 ""}}}
-Plug 'dkprice/vim-easygrep', {'on' : 'Grep'} "{{{
+"Plug 'dkprice/vim-easygrep', {'on' : 'Grep'} "{{{
 let g:EasyGrepWindow=1
 "let g:EasyGrepCommand = 1   " use external grep has no result
 let g:EasyGrepReplaceWindowMode = 2
 "}}}
-Plug 'rizzatti/dash.vim', {'on' : 'Dash'}
-Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'} "{{{
+"Plug 'rizzatti/dash.vim', {'on' : 'Dash'}
+"Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'} "{{{
 " If php-cs-fixer is in $PATH, you don't need to define line below
 let g:php_cs_fixer_path = "/usr/local/homebrew/Cellar/php-cs-fixer/1.10/libexec/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
 let g:php_cs_fixer_level = "symfony"              " which level ?
