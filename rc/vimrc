@@ -48,21 +48,21 @@ let g:airline_theme='custom'
 "let g:airline_section_warning = '%{strftime("%H:%M",getftime(expand("%")))} %{printf("%s", " \ue26f ")}'
 "}}}
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
-"let g:ctrlp_extensions = ['funky', 'mixed']
-"let g:ctrlp_funky_syntax_highlight = 1
-"let g:ctrlp_cmd = 'CtrlPFunky'
-"let g:ctrlp_show_hidden = 1
-"let g:ctrlp_regexp = 1
-"let g:ctrlp_clear_cache_on_exit = 0
-"let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:40,results:100'
-"let g:ctrlp_working_path_mode = 'rw'
-"if executable('ag')
-    "let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
-"elseif executable('file')
-    "let g:ctrlp_user_command = 'find %s -type f'
-"endif
-""}}}
+Plug 'kien/ctrlp.vim' | Plug 'tacahiroy/ctrlp-funky' "{{{
+let g:ctrlp_extensions = ['funky', 'mixed']
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_cmd = 'CtrlPFunky'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_regexp = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:40,results:100'
+let g:ctrlp_working_path_mode = 'rw'
+if executable('ag')
+    let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+elseif executable('file')
+    let g:ctrlp_user_command = 'find %s -type f'
+endif
+"}}}
 Plug 'scrooloose/nerdtree' "{{{
 let g:NERDTreeQuitOnOpen=0
 let g:NERDTreeShowBookmarks=1
