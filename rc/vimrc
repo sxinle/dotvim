@@ -201,7 +201,7 @@ let g:goldenview__enable_default_mapping=0
 "let g:yankring_replace_n_nkey=''
 "let g:yankring_history_dir=g:dotvim_settings.local_path . 'yankring'
 ""}}}
-"Plug 'dkprice/vim-easygrep', {'on' : 'Grep'} "{{{
+Plug 'dkprice/vim-easygrep', {'on' : 'Grep'} "{{{
 let g:EasyGrepWindow=1
 "let g:EasyGrepCommand = 1   " use external grep has no result
 let g:EasyGrepReplaceWindowMode = 2
