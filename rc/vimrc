@@ -915,9 +915,12 @@ endfunction
 " sdcv translate" {{{
 function! Translate(...)
     let word = (a:1 == '') ? expand("<cword>") : a:1
-    "let ret=system('sdcv -n ' . word)
-    let ret=system('~/folder/util/mactools/bin/dict.py ' . word)
-    let ret = substitute(substitute(ret, "\!\[CDATA\[", "", "g"), "\]\]", "", "g")
+    "stardict翻译 let ret=system('sdcv -n ' . word)
+    "有道在线翻译
+    "let ret=system('~/folder/util/mactools/bin/dict.py ' . word)
+    "let ret = substitute(substitute(ret, "\!\[CDATA\[", "", "g"), "\]\]", "", "g")
+    "java翻译
+    let ret = system('cd ~/folder/util/mactools/dict/&&java -cp . Translator ' . word)
     echo ret
 endfunction
 "}}}
