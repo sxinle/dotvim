@@ -413,7 +413,7 @@ xmap <F2> <Plug>NrrwrgnDo
 "step2=>json.dump函数加上参数
 "ensure_ascii=False
 "[!!!python <<EOF import vim EOF]
-nnoremap <F3> :%!python -m json.tool<CR>
+nnoremap <F3> :%!~/folder/util/mactools/json/tool.py<CR>
 nmap <F4> <Plug>ToggleGoldenViewAutoResize
 nnoremap <silent> <F5> :AirlineToggle<CR>
 nnoremap <silent> <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR> :exe 'AirlineTheme ' . airline_theme<CR> :redraw!<CR>
