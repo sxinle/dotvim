@@ -3,7 +3,8 @@ source ~/.vim/dotvim/rc/vimrc
 try
     if (has('gui_running'))
         if(has('gui_macvim'))
-            call SwitchTheme(26)
+            "call SwitchTheme(26)
+            call SwitchTheme(7)
         else
             "call SwitchTheme(26)
             call SwitchTheme(7)
