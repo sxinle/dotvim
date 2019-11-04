@@ -9,7 +9,7 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 source ~/.vim/dotvim/plug.vim
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Lokaltog/vim-easymotion' "{{{
@@ -146,13 +146,6 @@ nmap <silent> N <Plug>(anzu-N-with-echo)zz
 Plug 'Valloric/MatchTagAlways' "{{{
 let g:mta_filetypes = {'html' : 1, 'xhtml' : 1, 'xml' : 1, 'jinja' : 1, 'aspvbs' : 1, 'jsp' : 1 }
 "}}}
-"Plug 'oblitum/YouCompleteMe' "{{{
-"let g:ycm_global_ycm_extra_conf = g:dotvim_settings.local_path.'ycm_extra_conf.py'
-"let g:EclimCompletionMethod = 'omnifunc'
-"let g:ycm_always_populate_location_list=1
-"let g:ycm_key_invoke_completion = '<C-L>'
-"let g:ycm_complete_in_comments = 1
-""}}}
 "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' "{{{
 "let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsJumpForwardTrigger="<c-j>"
