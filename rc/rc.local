@@ -7,10 +7,11 @@ try
             call SwitchTheme(7)
         else
             "call SwitchTheme(26)
-            call SwitchTheme(7)
+            call SwitchTheme(10)
         endif
     else
         "colo wombat256
+        call SwitchTheme(4)
         highlight CursorLine cterm=NONE ctermbg=NONE
     endif
     "call RandomThemes(1)
