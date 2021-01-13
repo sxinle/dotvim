@@ -9,7 +9,7 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 source ~/.vim/dotvim/plug.vim
 call plug#begin('~/.vim/plugged')
 
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Lokaltog/vim-easymotion' "{{{
