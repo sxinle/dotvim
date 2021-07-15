@@ -9,7 +9,7 @@ let g:dotvim_settings.local_path = "~/.vim/.vlocal/"
 source ~/.vim/dotvim/plug.vim
 call plug#begin('~/.vim/plugged')
 
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Lokaltog/vim-easymotion' "{{{
@@ -897,10 +897,10 @@ endfunction
 "}}}
 " ycm auto trigger" {{{
 function! ToggleYcm()
-    let a:is_on = g:ycm_auto_trigger
-    let g:ycm_auto_trigger = (a:is_on == 0) ? 1 : 0
+    let l:is_on = g:ycm_auto_trigger
+    let g:ycm_auto_trigger = (l:is_on == 0) ? 1 : 0
     echohl moreMsg
-    echo "ycm_auto_trigger: " . ((a:is_on == 0) ? "On " : "Off ")
+    echo "ycm_auto_trigger: " . ((l:is_on == 0) ? "On " : "Off ")
     echohl NONE
 endfunction
 "}}}

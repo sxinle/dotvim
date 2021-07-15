@@ -15,10 +15,10 @@ touch $VIM_LOCAL_PATH"vimrc.local"
 cat ~/.vim/dotvim/rc/rc.local > $VIM_LOCAL_PATH"vimrc.local"
 
 # YouCompleteme
-cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py $VIM_LOCAL_PATH"ycm_extra_conf.py"
+cp ~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py $VIM_LOCAL_PATH"ycm_extra_conf.py"
 
 # link theme and tern-project
-ln -sf ~/.vim/dotvim/util/custom.vim ~/.vim/bundle/vim-airline/autoload/airline/themes/custom.vim
+ln -sf ~/.vim/dotvim/util/custom.vim ~/.vim/plugged/vim-airline/autoload/airline/themes/custom.vim
 ln -sf ~/.vim/dotvim/util/tern-project ~/.tern-project
 
 # viminfo will in this dir too
